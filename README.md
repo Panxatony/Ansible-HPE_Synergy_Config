@@ -4,7 +4,7 @@ A group of ansible scripts produced for an account in DXC.technology for OneView
 
 In this GitHub, it holds the structure of files in order for the Ansible playbooks to work.
 
-## PLAYBOOKS:
+## PLAYBOOK Information:
 All the plabooks are in the path of: roles, where you will see the set of folders. Each folder holds a task folder and a main.yml file within it, which is the playbook itself. In order to get items to work with Ansible Tower, I have commented out the config file and any reference to variable directory. If the preferred manner to run Ansible is natively, the config files will need to be commented back in.
 
 #### Tower run Playbooks:
@@ -33,3 +33,8 @@ The actual configuration file used for this repository has not been uploaded for
 
 ### TIP:
 If wanting to produce Ansible with multiple functions (example delete multiple Ethernet functions), copy the required code and paste directly under and change the relevant details. Ansible will read the playbook and complete the tasks
+
+## PLAYBOOKS:
+A list of Playbooks in this repository:
+
+[Appliance Time and Locale Configuration](https://github.com/thopper91/Ansible-HPE_Synergy_Config/blob/master/roles/Appliance_Time_and_Locale_Configuration/tasks/main.yml)
