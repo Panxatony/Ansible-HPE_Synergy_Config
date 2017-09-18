@@ -1,3 +1,8 @@
+# This Playbook is to run an additional playbook within the roles folder:
+#   - Turn the server bay off by pressing and holding the power button
+#
+#
+# Created by thopper91 (2017)
 ---
 - hosts: all
   connection: local

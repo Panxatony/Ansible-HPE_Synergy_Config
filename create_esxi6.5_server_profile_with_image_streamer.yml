@@ -1,3 +1,8 @@
+# Playbook to run an additional playbook within the roles folder
+#   - This is to create an ESXi server profile within OneView
+#
+#
+# Created by thopper91 (2017)
 ---
 - hosts: all
   connection: local

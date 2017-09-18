@@ -1,5 +1,9 @@
+# This Playbook is to run an additional playbook within the roles folder:
+#   - Delete a user
+#
+#
+# Created by thopper91 (2017)
 ---
-
 - hosts: all
   connection: local
   gather_facts: True

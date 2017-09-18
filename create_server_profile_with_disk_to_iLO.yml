@@ -1,3 +1,9 @@
+# This Playbook is to run two additional playbook within the roles folder:
+#   - Create a server profile with local storage
+#   - Attach an ILO disk to the profile
+#
+#
+# Created by thopper91 (2017)
 ---
 - hosts: all
   connection: local

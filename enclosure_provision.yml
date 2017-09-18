@@ -1,3 +1,26 @@
+# This Playbook is to run a set additional playbook within the roles folder.
+# These playbooks are to do a full enclosure provision to prevent any manual work:
+#   - Create a yse
+#   - Ensure the time and locale configuration is correct
+#   - Create IPv4 Subnet
+#   - Create IPv4 Range and to ensure it is Enabled
+#   - Create SAN Manager
+#   - Create Storage system with its pools
+#   - Add the networks
+#   - Put them into network sets
+#   - Gather all the networks URIs
+#   - Create LIGs
+#   - Create Enclosure Groups
+#   - Create Logical Enclosures
+#
+# NOTE #1: Further work will need to go into this to ensure the variables are entered in
+# correctly and the correct amount to items (networks, users etc) are added in manually.
+# Once all of these values are placed, it should take a maximum of 30mins to provision the enclosure
+# rather than days
+#
+# NOTE #2: If prefered, there is a full provision playbook in roles
+#
+# Created by thopper91 (2017)
 ---
 - hosts: all
   connection: local

@@ -20,7 +20,8 @@ Network_Name: 'Test Network'
 ```
 
 ## CONFIG FILE:
-The file details are not on the site for security reasons. If required, please contact the Nucleus Synergy POC team. When recieved, the file should go in the 'top' folder (same location as the current ansible.cfg file)
+The actual configuration file used for this repository has not been uploaded for security reasons, however an example for how the config file can be setup is here:
+
 ```json
 "ip": "0.0.0.0",
 "credentials": {

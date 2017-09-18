@@ -1,3 +1,8 @@
+# This Playbook is to run an additional playbook within the roles folder:
+#   - Turn the Server bay on
+#
+#
+# Created by thopper91 (2017)
 ---
 - hosts: all
   connection: local
