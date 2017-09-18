@@ -1,3 +1,5 @@
+# Created by thopper91 (2017)
+ 
 - name: Gather facts about all Managed SANs
   oneview_managed_san_facts:
 #    config: "{{ config }}"

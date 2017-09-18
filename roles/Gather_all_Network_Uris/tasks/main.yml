@@ -1,6 +1,6 @@
-#
-# Gather information and store as local variables
-#
+# Created by thopper91 (2017)
+ 
+### Gather information and store as local variables
 - name: Gather facts about deployment network & Store variable
   oneview_ethernet_network_facts:
 #    config: "{{ config }}"

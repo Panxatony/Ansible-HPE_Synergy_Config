@@ -1,6 +1,8 @@
+# Created by thopper91 (2017)
+ 
 - name: Remove Subnet link from '{{ NET_Eth_Name }}' Network
   oneview_ethernet_network:
-    config: '{{ config }}'
+  #  config: '{{ config }}'
     state: present
     data:
       name: "{{ NET_Eth_Name }}"

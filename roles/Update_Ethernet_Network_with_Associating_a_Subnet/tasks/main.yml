@@ -1,13 +1,15 @@
+# Created by thopper91 (2017)
+ 
 - name: Gather facts about '{{ Subnet_Name }}' IPV4 Subnets
   oneview_id_pools_ipv4_subnet_facts:
-    config: "{{ config }}"
+#    config: "{{ config }}"
     name: "{{ Subnet_Name }}"
 
 - set_fact: subnet_uri="{{ id_pools_ipv4_subnets[0].uri }}"
 
 - name: Associate '{{ NET_Eth_Name }}' Network to Subnet
   oneview_ethernet_network:
-    config: '{{ config }}'
+#    config: '{{ config }}'
     state: present
     data:
       name: "{{ NET_Eth_Name }}"

@@ -1,10 +1,12 @@
+# Created by thopper91 (2017)
+
 # Include all variable files in the vars folder
 #
-- name: Include all variable files
-  include_vars:
-    dir: 'vars' #change directory if needed
-    extensions:
-        - yml
+#- name: Include all variable files
+#  include_vars:
+#    dir: 'vars' #change directory if needed
+#    extensions:
+#        - yml
 #
 # Gather information
 #

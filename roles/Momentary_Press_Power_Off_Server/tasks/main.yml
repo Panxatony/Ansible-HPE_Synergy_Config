@@ -1,3 +1,5 @@
+# Created by thopper91 (2017)
+ 
 - name: Power On the server hardware
   oneview_server_hardware:
 #    config: "{{ config }}"
@@ -5,6 +7,6 @@
     data:
         name : "{{ Serv_b5 }}" #Choose a bay and server to turn on
         powerStateData:
-            powerState: "On"
+            powerState: "Off"
             powerControl: "MomentaryPress"
   delegate_to: localhost

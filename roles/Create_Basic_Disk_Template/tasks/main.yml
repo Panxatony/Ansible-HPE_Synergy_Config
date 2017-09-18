@@ -1,3 +1,5 @@
+# Created by thopper91 (2017)
+
 - name: Gather facts about all Storage Pools
   oneview_storage_pool_facts:
 #    config: "{{ config }}"
