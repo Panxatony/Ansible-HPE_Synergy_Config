@@ -22,10 +22,10 @@ Network_Name: 'Test Network'
 ## CONFIG FILE:
 The file details are not on the site for security reasons. If required, please contact the Nucleus Synergy POC team. When recieved, the file should go in the 'top' folder (same location as the current ansible.cfg file)
 ```json
-"ip": "10.0.5.2",
+"ip": "0.0.0.0",
 "credentials": {
-    "userName": "Administrator",
-    "password": "Start123"
+    "userName": "Username",
+    "password": "password"
     },
 "api_version": 300
 ```
