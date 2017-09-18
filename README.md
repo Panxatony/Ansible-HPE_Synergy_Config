@@ -37,4 +37,4 @@ If wanting to produce Ansible with multiple functions (example delete multiple E
 ## PLAYBOOKS:
 A list of Playbooks in this repository:
 
-[Appliance Time and Locale Configuration](https://github.com/thopper91/Ansible-HPE_Synergy_Config/blob/master/roles/Appliance_Time_and_Locale_Configuration/tasks/main.yml)
+- [Appliance Time and Locale Configuration](https://github.com/thopper91/Ansible-HPE_Synergy_Config/blob/master/roles/Appliance_Time_and_Locale_Configuration/tasks/main.yml)
