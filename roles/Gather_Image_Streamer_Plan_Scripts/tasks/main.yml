@@ -1,0 +1,14 @@
+# Created by thopper91 (2017)
+
+- name: Gather facts about all Plan Scripts
+  image_streamer_plan_script_facts:
+    config: "{{ config }}"
+  delegate_to: localhost
+- debug: var=plan_scripts
+
+- name: Gather facts about a Plan Script by name
+  image_streamer_plan_script_facts:
+    config: "{{ config }}"
+    name: "{{ Plan_Script_Name }}"
+  delegate_to: localhost
+- debug: var=plan_scripts

@@ -1,0 +1,61 @@
+# Created by thopper91 (2017)
+
+- name: Include vars for OpenShift
+  include_vars:
+    file: OpenShift.yml
+
+- name: Gather facts on "{{ plan_script_1 }}"
+  image_streamer_plan_script_facts:
+    config: "{{ config }}"
+    name: "{{ plan_script_1 }}"
+  delegate_to: localhost
+- set_fact: script1_uri="{{ plan_scripts[0].uri }}"
+
+- name: Gather facts on "{{ plan_script_2 }}"
+  image_streamer_plan_script_facts:
+    config: "{{ config }}"
+    name: "{{ plan_script_2 }}"
+  delegate_to: localhost
+- set_fact: script2_uri="{{ plan_scripts[0].uri }}"
+
+- name: Gather facts on "{{ plan_script_3 }}"
+  image_streamer_plan_script_facts:
+    config: "{{ config }}"
+    name: "{{ plan_script_3 }}"
+  delegate_to: localhost
+- set_fact: script3_uri="{{ plan_scripts[0].uri }}"
+
+- name: Gather facts on "{{ plan_script_4 }}"
+  image_streamer_plan_script_facts:
+    config: "{{ config }}"
+    name: "{{ plan_script_4 }}"
+  delegate_to: localhost
+- set_fact: script4_uri="{{ plan_scripts[0].uri }}"
+
+- name: Gather facts on "{{ plan_script_5 }}"
+  image_streamer_plan_script_facts:
+    config: "{{ config }}"
+    name: "{{ plan_script_5 }}"
+  delegate_to: localhost
+- set_fact: script5_uri="{{ plan_scripts[0].uri }}"
+
+- name: Create an OS Build Plan
+  image_streamer_build_plan:
+    config: "{{ config }}"
+    state: present
+    data:
+      name: "{{ build_plan_name }}"
+      description: "{{ build_plan_description }}"
+      oeBuildPlanType: "capture"
+      buildStep:
+        - serialNumber: 1
+          planScriptUri: "{{ script1_uri }}"
+        - serialNumber: 2
+          planScriptUri: "{{ script2_uri }}"
+        - serialNumber: 3
+          planScriptUri: "{{ script3_uri }}"
+        - serialNumber: 4
+          planScriptUri: "{{ script4_uri }}"
+        - serialNumber: 5
+          planScriptUri: "{{ script5_uri }}"
+  delegate_to: localhost

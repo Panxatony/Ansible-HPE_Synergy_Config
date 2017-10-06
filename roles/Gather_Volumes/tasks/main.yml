@@ -1,9 +1,8 @@
 # Created by thopper91 (2017)
- 
+
 - name: Gather facts about all Volumes
   oneview_volume_facts:
-    name: "FC_r5"
-#    name: "{{ Vol_Stor_Pool5 }}"
+    name: "{{ Vol_Stor_Pool5 }}"
 #    config: "{{ config }}"
 
 - debug: var=storage_volumes

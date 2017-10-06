@@ -1,0 +1,9 @@
+# Created by thopper91 (2017)
+
+- name: Remove an Artifact Bundle
+  image_streamer_artifact_bundle:
+    config: "{{ config }}"
+    state: absent
+    data:
+      name: "{{ Artifact_Bundle_Name }}"
+  delegate_to: localhost

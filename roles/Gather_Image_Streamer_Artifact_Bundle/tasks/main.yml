@@ -1,0 +1,14 @@
+# Created by thopper91 (2017)
+
+- name: Gather facts about all Artifact Bundles
+  image_streamer_artifact_bundle_facts:
+    config: "{{ config }}"
+  delegate_to: localhost
+- debug: var=artifact_bundles
+
+- name: Gather facts about an Artifact Bundle by name
+  image_streamer_artifact_bundle_facts:
+    config: "{{ config }}"
+    name: "{{ Artifact_Bundle_Name }}"
+  delegate_to: localhost
+- debug: var=artifact_bundles

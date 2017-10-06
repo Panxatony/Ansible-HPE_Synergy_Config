@@ -1,0 +1,151 @@
+# Created by thopper91 (2017)
+
+### Include all variable files in the vars folder
+- name: Include all variable files
+  include_vars:
+    dir: 'vars' #change directory if needed
+    extensions:
+        - yml
+
+### Gather Network URI
+- name: Gather facts about Ethernet Networks by name
+  oneview_ethernet_network_facts:
+    config: "{{ config }}"
+    name: "{{ Contain_VLAN }}"
+- set_fact: Network_uri="{{ ethernet_networks[0].uri }}"
+
+### Gather Server Hardware Uri
+- name: Gather facts about a Server Hardware by name
+  oneview_server_hardware_facts:
+    config:  "{{ config }}"
+    name: "{{ Serv_b5 }}"
+  delegate_to: localhost
+
+- set_fact: Server_HW="{{ server_hardwares[0].uri }}"
+
+### Begin the creation of profile
+- name: Create "{{ IS_Node2_Name }}" profile for Openshift
+  oneview_server_profile:
+#    config: "{{ config }}"
+    state: present
+    data:
+      name: "{{ IS_Node2_Name }}"
+      description: "{{ IS_node_prof_Description }}"
+      serverHardwareUri: "{{ Server_HW }}"
+      serverHardwareTypeName: "{{ Serv_Type480 }}"
+      enclosureGroupName: "{{ Enclosure_Group }}"
+### This function of code is for the image streamer. If not needed, remove
+      osDeploymentSettings:
+        osDeploymentPlanName: "{{ deploy_plan_name }}"
+        osCustomAttributes:
+          -  name: ManagementNIC1.ipv4disable
+             value: false
+          -  name: ManagementNIC1.constraint
+             value: "userspecified"
+          -  name: ManagementNIC1.domain
+             value: "{{ domain }}"
+          -  name: ManagementNIC1.connectionid
+             value: 6
+          -  name: ManagementNIC1.ipaddress
+             value: "{{ Node2IpAddress }}"
+          -  name: ManagementNIC1.gateway
+             value: "{{ IpGateway }}"
+          -  name: ManagementNIC1.dns1
+             value: "{{ IpDns1 }}"
+          -  name: ManagementNIC1.dns2
+             value: "{{ IpDns2 }}"
+          -  name: ManagementNIC1.netmask
+             value: "{{ IpNetmask }}"
+          -  name: ManagementNIC1.networkuri
+             value: "{{ Network_uri }}"
+          -  name: NewRootPassword
+             value: null
+          -  name: NewUsers
+             value: "{{ newUser }}"
+          -  name: DomainName
+             value: "{{ Node2domainName }}"
+          -  name: SSH
+             value: Enabled
+          -  name: TotalMgmtNICs
+             value: 1
+          -  name: ManagementNIC2.ipv4disable
+             value: True
+          -  name: ManagementNIC3.ipv4disable
+             value: True
+          -  name: ManagementNIC4.ipv4disable
+             value: True
+# Boot mode and Setting are requred
+      bootMode:
+        manageMode: True
+        mode: "UEFI"
+        pxeBootPolicy: "Auto"
+      boot:
+        manageBoot: True
+        order:
+        - "HardDisk"
+### Local Storage
+      localStorage:
+        controllers:
+          - deviceSlot: "Embedded"
+            mode: "RAID"
+            initialize: False #Initialize storage on next profile
+            importConfiguration: false #Import existing logical Drives
+            logicalDrives:
+              - name: "{{ Local_Stor_Name1 }}"
+                raidLevel: "RAID1"
+                numPhysicalDrives: 2
+                driveTechnology: "SasHdd"
+                driveNumber: 1
+                bootable: false
+              - name: "{{ Local_Stor_Name2 }}"
+                raidLevel: "RAID1"
+                numPhysicalDrives: 2
+                driveTechnology: "SasHdd"
+                driveNumber: 2
+                bootable: false
+# Network connections.
+# FC networks are required for the SAN storages
+      connections:
+        - id: 1
+          name: "{{ Deploy_NET }}"
+          functionType: "Ethernet"
+          portId: "Mezz 3:1-a"
+          requestedMbps: 2500 #2.5Gb
+          networkName: "{{ Deploy_NET }}"
+          boot:
+            priority: "Primary" #used as it is an iSCSi network
+        - id: 2
+          name: "{{ Contain_VLAN }}"
+          functionType: "Ethernet"
+          portId: "Mezz 3:1-c"
+          requestedMbps: 2500 #2.5Gb
+          networkName: "{{ Contain_VLAN }}"
+          boot:
+            priority: "NotBootable"
+        - id: 3
+          name: "{{ NET_SAN_A }}"
+          functionType: "FibreChannel"
+          portId: "Mezz 3:1-b"
+          requestedMbps: 2500 #2.5Gb
+          networkName: "{{ NET_SAN_A }}"
+          boot:
+            priority: "NotBootable"
+        - id: 4
+          name: "{{ NET_SAN_B }}"
+          functionType: "FibreChannel"
+          portId: "Mezz 3:2-b"
+          requestedMbps: 2500 #2.5Gb
+          networkName: "{{ NET_SAN_B }}"
+          boot:
+            priority: "NotBootable"
+# Power on Server Profile
+- name: Power On the server hardware
+  oneview_server_hardware:
+#    config: "{{ config }}"
+    state: power_state_set
+    data:
+        name : "{{ Serv_b5 }}" #The Server HW name
+        powerStateData:
+            powerState: "On"
+            powerControl: "MomentaryPress" #MomentaryPress and PressAndHold are the two options
+  delegate_to: localhost

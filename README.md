@@ -112,6 +112,7 @@ The actual configuration file used for this repository has not been uploaded for
 
 ```json
 "ip": "0.0.0.0",
+"image_streamer_ip": "0.0.0.1", #If an Image Stream has been installed
 "credentials": {
     "userName": "Username",
     "password": "password"

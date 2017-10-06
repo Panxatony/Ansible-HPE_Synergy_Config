@@ -1,0 +1,21 @@
+# Created by thopper91 (2017)
+
+- name: Include vars for OpenShift
+  include_vars:
+    file: OpenShift.yml
+
+- name: Upload an Artifact Bundle
+  image_streamer_artifact_bundle:
+    config: "{{ config }}"
+    state: present
+    data:
+      localArtifactBundleFilePath: '/home/{{ path_user }}/{{ Sample_Artifact_Bundle }}'
+  delegate_to: localhost
+
+- name: Extract an Artifact Bundle
+  image_streamer_artifact_bundle:
+    config: "{{ config }}"
+    state: extracted
+    data:
+      name: "{{ Sample_Artifact_Bundle }}"
+  delegate_to: localhost

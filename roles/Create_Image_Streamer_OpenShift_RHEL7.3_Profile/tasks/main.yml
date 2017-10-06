@@ -1,0 +1,134 @@
+# Created by thopper91 (2017)
+
+### Include all variable files in the vars folder
+- name: Include all variable files
+  include_vars:
+    dir: 'vars' #change directory if needed
+    extensions:
+        - yml
+
+### Gather Network URI
+- name: Gather facts about Ethernet Networks by name
+  oneview_ethernet_network_facts:
+#    config: "{{ config }}"
+    name: "{{ Contain_VLAN }}"
+- set_fact: Network_uri="{{ ethernet_networks[0].uri }}"
+
+### Gather Server Hardware Uri
+- name: Gather facts about a Server Hardware by name
+  oneview_server_hardware_facts:
+#    config:  "{{ config }}"
+    name: "{{ Serv_b5 }}"
+  delegate_to: localhost
+
+- set_fact: Server_HW="{{ server_hardwares[0].uri }}"
+
+### Begin the creation of profile
+- name: Create "{{ IS_RHEL7.3_Name }}" profile for Openshift
+  oneview_server_profile:
+#    config: "{{ config }}"
+    state: present
+    data:
+      name: "{{ IS_RHEL7.3_Name }}"
+      description: "{{ IS_cap_prof_Description }}"
+      serverHardwareUri: "{{ Server_HW }}"
+      serverHardwareTypeName: "{{ Serv_Type480 }}"
+      enclosureGroupName: "{{ Enclosure_Group }}"
+### This function of code is for the image streamer. If not needed, remove
+      osDeploymentSettings:
+        osDeploymentPlanName: "{{ deploy_plan_name2 }}"
+        osCustomAttributes:
+          -  name: VolumeSize
+             value: "20000"
+# Boot mode and Setting are requred
+      bootMode:
+        manageMode: True
+        mode: "UEFI"
+        pxeBootPolicy: "Auto"
+      boot:
+        manageBoot: True
+        order:
+        - "HardDisk"
+### SAN Storage. The LUN starts at 0
+      sanStorage:
+        hostOSType: 'RHE Linux (5.x, 6.x)'
+        manageSanStorage: true
+        volumeAttachments:
+          - id: 1
+            volumeName: "{{ Vol_Name_1 }}"
+            volumeStoragePoolName: "{{ Vol_Stor_Pool5 }}"
+            volumeStorageSystemName: "{{ Vol_Stor_Sys }}"
+            lunType: "Auto"
+            lun: 0
+            isBootVolume: "true"
+            storagePaths:
+              - isEnabled: true
+                connectionId: 3 #SAN-A
+                storageTargetType: 'Auto'
+              - isEnabled: true
+                connectionId: 4 #SAN-B
+                storageTargetType: 'Auto'
+# Network connections.
+# FC networks are required for the SAN storages
+      connections:
+        - id: 1
+          name: "{{ Deploy_NET }}"
+          functionType: "Ethernet"
+          portId: "Mezz 3:1-a"
+          requestedMbps: 2500 #2.5Gb
+          networkName: "{{ Deploy_NET }}"
+          boot:
+            priority: "Primary" #used as it is an iSCSi network
+        - id: 2
+          name: "{{ Contain_VLAN }}"
+          functionType: "Ethernet"
+          portId: "Mezz 3:1-c"
+          requestedMbps: 2500 #2.5Gb
+          networkName: "{{ Contain_VLAN }}"
+          boot:
+            priority: "NotBootable"
+        - id: 3
+          name: "{{ NET_SAN_A }}"
+          functionType: "FibreChannel"
+          portId: "Mezz 3:1-b"
+          requestedMbps: 2500 #2.5Gb
+          networkName: "{{ NET_SAN_A }}"
+          boot:
+            priority: "NotBootable"
+        - id: 4
+          name: "{{ NET_SAN_B }}"
+          functionType: "FibreChannel"
+          portId: "Mezz 3:2-b"
+          requestedMbps: 2500 #2.5Gb
+          networkName: "{{ NET_SAN_B }}"
+          boot:
+            priority: "NotBootable"
+
+### Gather relevant information for ilo Address and attach iso to profile
+- name: Gather facts about a Server Hardware by name
+  oneview_server_hardware_facts:
+#    config:  "{{ config }}"
+    name: "{{ Serv_b5 }}"
+  delegate_to: localhost
+- set_fact: iloAddress="{{ server_hardwares[0].mpHostInfo.mpIpAddresses[1].address }}"
+
+- name: Attach CentOS Atomic 7 iso to Profile
+  hpilo_boot:
+    host: "{{ iloAddress }}"
+    login: "{{ ilo_Username }}"
+    password: "{{ ilo_Password }}"
+    media: cdrom
+    image: "{{ RHEL7.3 }}"
+  delegate_to: localhost
+
+# Power on Server Profile
+- name: Power On the server hardware
+  oneview_server_hardware:
+#    config: "{{ config }}"
+    state: power_state_set
+    data:
+        name : "{{ Serv_b5 }}" #The Server HW name
+        powerStateData:
+            powerState: "On"
+            powerControl: "MomentaryPress" #MomentaryPress and PressAndHold are the two options
+  delegate_to: localhost

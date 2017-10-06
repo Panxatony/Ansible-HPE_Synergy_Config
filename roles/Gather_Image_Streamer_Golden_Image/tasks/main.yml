@@ -1,0 +1,16 @@
+# Created by thopper91 (2017)
+
+- name: Gather facts about all Golden Images
+  image_streamer_golden_image_facts:
+    config: "{{ config }}"
+  delegate_to: localhost
+
+- debug: var=golden_images
+
+- name: Gather facts by name
+  image_streamer_golden_image_facts:
+    config: "{{ config }}"
+    name: "{{ Golden_Image_Name }}"
+  delegate_to: localhost
+
+- debug: var=golden_images

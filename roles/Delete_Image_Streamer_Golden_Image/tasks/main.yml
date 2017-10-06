@@ -1,0 +1,9 @@
+# Created by thopper91 (2017)
+
+- name: Remove a Golden Image
+  image_streamer_golden_image:
+    config: "{{ config }}"
+    state: absent
+    data:
+        name: "{{ Golden_Image_Name }}"
+  delegate_to: localhost

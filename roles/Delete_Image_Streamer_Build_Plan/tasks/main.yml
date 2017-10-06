@@ -1,0 +1,9 @@
+# Created by thopper91 (2017)
+
+- name: Remove an OS Build Plan
+  image_streamer_build_plan:
+    config: "{{ config }}"
+    state: absent
+    data:
+        name: "{{ Build_Plan_Name }}"
+  delegate_to: localhost

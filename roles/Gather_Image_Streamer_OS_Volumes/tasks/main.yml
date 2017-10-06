@@ -1,0 +1,16 @@
+# Created by thopper91 (2017)
+
+- name: Gather facts about all OS Volumes
+  image_streamer_os_volume_facts:
+    config: "{{ config }}"
+  delegate_to: localhost
+
+- debug: var=os_volumes
+
+- name: Gather facts about an OS Volume by name
+  image_streamer_os_volume_facts:
+    config: "{{ config }}"
+    name: "{{ OS_Volume_Name }}"
+  delegate_to: localhost
+
+- debug: var=os_volumes

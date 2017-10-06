@@ -1,0 +1,14 @@
+# Created by thopper91 (2017)
+
+- name: Gather facts about all Build Plans
+  image_streamer_build_plan_facts:
+    config: "{{ config }}"
+  delegate_to: localhost
+- debug: var=build_plans
+
+- name: Gather facts about a Build Plan by name
+  image_streamer_build_plan_facts:
+    config: "{{ config }}"
+    name: "{{ Build_Plan_Name }}"
+  delegate_to: localhost
+- debug: var=build_plans

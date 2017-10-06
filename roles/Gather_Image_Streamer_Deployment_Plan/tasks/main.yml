@@ -1,0 +1,14 @@
+# Created by thopper91 (2017)
+
+- name: Gather facts about all Deployment Plans
+  image_streamer_deployment_plan_facts:
+    config: "{{ config }}"
+  delegate_to: localhost
+- debug: var=deployment_plans
+
+- name: Gather facts about a Deployment Plan by name
+  image_streamer_deployment_plan_facts:
+    config: "{{ config }}"
+    name: "{{ Deployment_Plan_Name }}"
+  delegate_to: localhost
+- debug: var=deployment_plans

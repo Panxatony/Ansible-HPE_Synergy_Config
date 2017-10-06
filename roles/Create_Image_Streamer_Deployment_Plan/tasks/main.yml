@@ -1,0 +1,16 @@
+# Created by thopper91 (2017)
+
+- name: Include vars for OpenShift
+  include_vars:
+    file: OpenShift.yml
+
+- name: Create a Deployment Plan
+  image_streamer_deployment_plan:
+    config: "{{ config }}"
+    state: present
+    data:
+      name: "{{ Deployment_plan_name }}"
+      description: "{{ Deployment_plan_description }}"
+      hpProvided: 'false'
+      oeBuildPlanName: "{{ build_plan_name }}"
+  delegate_to: localhost

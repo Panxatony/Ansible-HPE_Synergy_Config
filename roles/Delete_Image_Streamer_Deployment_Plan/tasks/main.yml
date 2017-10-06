@@ -1,0 +1,9 @@
+# Created by thopper91 (2017)
+
+- name: Remove the Deployment Plan
+  image_streamer_deployment_plan:
+    config: "{{ config }}"
+    state: absent
+    data:
+        name: "{{ Deployment_Plan_Name }}"
+  delegate_to: localhost

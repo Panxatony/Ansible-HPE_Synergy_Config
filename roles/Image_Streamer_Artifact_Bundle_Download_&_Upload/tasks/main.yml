@@ -1,0 +1,33 @@
+# Created by thopper91 (2017)
+
+- name: Include vars for OpenShift
+  include_vars:
+    file: OpenShift.yml
+
+- name: Download Image Streamer Sample Artifact Bundle "{{ Sample_Artifact_Bundle }}" from GitHub
+  get_url:
+    url: https://github.com/HewlettPackard/image-streamer-rhel/tree/v3.1/artifact-bundles/rhel7.3/{{ Sample_Artifact_Bundle }}
+    dest: /home/{{ path_user }}/{{ Sample_Artifact_Bundle }}
+    mode: 0444
+
+- name: Download Image Streamer Foundation Artifact Bundle "{{ Tools_Foundation_Artifact_Bundle }}" from GitHub
+  get_url:
+    url: https://github.com/HewlettPackard/image-streamer-tools/tree/v3.1/foundation/artifact-bundles/{{ Tools_Foundation_Artifact_Bundle }}
+    dest: /home/{{ path_user }}/{{ Tools_Foundation_Artifact_Bundle }}
+    mode: 0444
+
+- name: Upload an Artifact Bundle
+  image_streamer_artifact_bundle:
+    config: "{{ config }}"
+    state: present
+    data:
+      localArtifactBundleFilePath: '/home/{{ path_user }}/{{ Sample_Artifact_Bundle }}'
+  delegate_to: localhost
+
+- name: Extract an Artifact Bundle
+  image_streamer_artifact_bundle:
+    config: "{{ config }}"
+    state: extracted
+    data:
+      name: "{{ Sample_Artifact_Bundle }}"
+  delegate_to: localhost
