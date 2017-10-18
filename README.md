@@ -137,7 +137,7 @@ There are many ways to structure Ansible, however this is the form I found worke
 A list of Playbooks in this repository, they can also be found in the roles folder:
 
 #### Add/Create Playbooks
-- [Appliance Time and Locale Configuration](https://github.com/thopper91/Ansible-HPE_Synergy_Config/blob/master/roles/Appliance_Time_and_Locale_Configuration/tasks/main.yml)
+- [Appliance Time and Locale Configuration](../master/roles/Appliance_Time_and_Locale_Configuration/tasks/main.yml)
 - [Attach ISO disk to ILO and server bay](https://github.com/thopper91/Ansible-HPE_Synergy_Config/blob/master/roles/Attach_disk_to_ILO/tasks/main.yml)
 - [Create a basic volume disk (100Gb)](https://github.com/thopper91/Ansible-HPE_Synergy_Config/blob/master/roles/Create_Basic_Disk_Template/tasks/main.yml)
 - [Create a server profile with ISO attached](https://github.com/thopper91/Ansible-HPE_Synergy_Config/blob/master/roles/Create_Basic_Server_Profile_with_iso_disk_attached/tasks/main.yml)
