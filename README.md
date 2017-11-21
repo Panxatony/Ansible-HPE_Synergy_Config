@@ -22,7 +22,7 @@ This information is very important when it comes to working with Ansible. The in
 Something also to take note, Ansible is very 'white-space' sensitive, which means if something is slightly out of line then the playbook will not execute. So to over come this, I used the tool Atom which eliminated that issue but there are others out there also...like Microsoft Visual Studio Code
 
 - [Atom](https://github.com/thopper91/Ansible-HPE_Synergy_Config/wiki/Atom)
-- [Microsoft Visual Studio Code](https://github.com/thopper91/Ansible-on-Windows/wiki/Microsoft-Visual-Studio-Code)
+- [Microsoft Visual Studio Code](https://github.com/thopper91/Ansible-HPE_Synergy_Config/wiki/Microsoft-Visual-Studio-Code)
 
 #### Add/Create Playbooks
 - [Appliance Time and Locale Configuration](../master/roles/Appliance_Time_and_Locale_Configuration/tasks/main.yml)
