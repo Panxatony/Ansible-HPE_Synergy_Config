@@ -2,139 +2,27 @@
 
 A group of ansible scripts produced for an account in DXC.technology for OneView in order to configure the HPE Synergy Server
 
-In this GitHub, it holds the structure of files in order for the Ansible playbooks to work.
+In this Readme file, it states what is required, for a further indepth explanation and a step by step on specific tasks (SDKs etc), please go [to the Wiki](https://github.com/thopper91/Ansible-HPE_Synergy_Config/wiki)
 
 ## Required SDKs and tools
-Here are a list of SDKs or plugins required to complete all or most of the Playbooks in this repository. 'sudo' installs the tool globally. Without it, then the tool will only download to the local user
+Firstly, you will need to install the following:
+- OpenSSH
+- Ansible
+- Python
+- Pip
+- Unzip
+- HP OneView SDK
+- HP ICSP
+- HP iLO
+Once all these have been installed, the environment variables will need to be set to point the Ansible and Python env vars to the new SDK packages
 
-### OpenSSH
-```json
-$ sudo apt-get install openssh-server
-$ sudo service ssh status
-```
+## Playbook, folder and file structure
+This information is very important when it comes to working with Ansible. The information can be found here: [Ansible Structure](https://github.com/thopper91/Ansible-HPE_Synergy_Config/wiki/Ansible-Structure---Folder-and-Files)
 
-### Ansible
-```json
-$ sudo apt-get install libssl-dev
-$ sudo pip install ansible
-```
-To check version:
-```json
-$ pip list
-```
-### Python and Pip
-```json
-$ sudo apt-get install python python-pip
-```
-To check versions:
-```json
-$ python --version
-$ pip --version
-```
-### unzip
-This tool is to literally unzip downloaded packages with the extension of '.zip'
-```json
-$ sudo apt-get install unzip
-```
-To check version:
-```json
-$ pip list
-```
+Something also to take note, Ansible is very 'white-space' sensitive, which means if something is slightly out of line then the playbook will not execute. So to over come this, I used the tool Atom which eliminated that issue but there are others out there also...like Microsoft Visual Studio Code
 
-### HP OneView
-First the packages need to be downloaded
-```json
-$ wget https://github.com/HewlettPackard/python-hpOneView/archive/master.zip
-$ wget https://github.com/HewlettPackard/oneview-ansible/archive/master.zip
-```
-Then rename the packages to something sensible (otherwise they will be the same). I chose ansible-master.zip and python-master.zip. Whatever they are named, now they need to be unzipped
-```json
-$ unzip python-master.zip
-$ unzip ansible-master.zip
-```
-Now to install
-```json
-$ cd python-hpOneView-3.2.2/ #Or whatever the python one is called after unzipping
-$ sudo pip install .
-```
-To check version:
-```json
-$ pip list
-```
-
-### HP ICsp
-```json
-$ git clone https://github.com/HewlettPackard/python-hpICsp.git
-$ cd python-hpICsp
-$ sudo pip install .
-```
-To check version:
-```json
-$ pip list
-```
-
-### HP ILO
-The HP ILO module is required to attach an ISO to a profile
-```json
-$ sudo add-apt-repository ppa:dennis/python
-$ sudo apt-get update
-$ sudo apt-get install python-hpilo
-```
-To check version:
-```json
-$ pip list
-```
-
-### Change Environment Variables
-Both paths need to be exported otherwise the modules will not work properly
-```json
-$ export ANSIBLE_LIBRARY=/home/hoppert/oneview-ansible-master/library/
-$ export PYTHONPATH=/home/hoppert/python-hpOneview-master:/home/hoppert/oneview-ansible-master/library
-```
-
-## PLAYBOOK Information:
-All the plabooks are in the path of: roles, where you will see the set of folders. Each folder holds a task folder and a main.yml file within it, which is the playbook itself. In order to get items to work with Ansible Tower, I have commented out the config file and any reference to variable directory. If the preferred manner to run Ansible is natively, the config files will need to be commented back in.
-
-#### Tower run Playbooks:
-These playbooks are stored in the Tower Playbooks folder, these are structured with the hosts, connections and roles listed as this is the format for Ansible Tower. They all reference the playbooks below
-
-## VARIABLES:
-If needing a variable file, ensure a 'vars' folder has been created in each folder on the same level as the 'tasks' folder. The actual variable file used for this repository has not been uploaded for security reasons, however an example for how the variable file can be setup is here:
-
-```json
-Server_Profile_Name: 'Test Profile'
-Serv_b1: 'Server Bay 1'
-Network_Name: 'Test Network'
-```
-
-## CONFIG FILE:
-The actual configuration file used for this repository has not been uploaded for security reasons, however an example for how the config file can be setup is here:
-
-```json
-"ip": "0.0.0.0",
-"image_streamer_ip": "0.0.0.1", #If an Image Stream has been installed
-"credentials": {
-    "userName": "Username",
-    "password": "password"
-    },
-"api_version": 300
-```
-Remember this needs to be named as 'config.json'
-
-### TIP:
-If wanting to produce Ansible with multiple functions (example delete multiple Ethernet functions), copy the required code and paste directly under and change the relevant details. Ansible will read the playbook and complete the tasks
-
-## Ansible structure
-There are many ways to structure Ansible, however this is the form I found worked well (when using native Ansible):
-- Inventory folder (holds hosts file)
-- Roles folder (all playbooks)
-- ansible.cfg (sets default parameters)
-- config.json (sets configuration details)
-- site.retry (just says 'localhost')
-- site.yml (Playbook to run anything within roles folder)
-
-## PLAYBOOKS:
-A list of Playbooks in this repository, they can also be found in the roles folder:
+- [Atom](https://github.com/thopper91/Ansible-HPE_Synergy_Config/wiki/Atom)
+- [Microsoft Visual Studio Code](https://github.com/thopper91/Ansible-on-Windows/wiki/Microsoft-Visual-Studio-Code)
 
 #### Add/Create Playbooks
 - [Appliance Time and Locale Configuration](../master/roles/Appliance_Time_and_Locale_Configuration/tasks/main.yml)
