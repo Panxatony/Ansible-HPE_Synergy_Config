@@ -1,0 +1,9 @@
+{
+  "ip": "OneView_IP_here",
+  "image_streamer_ip": "image_streamer_ip",
+  "credentials": {
+    "userName": "OneView_userName",
+    "password": "OneView_password"
+  },
+  "api_version": 300
+}

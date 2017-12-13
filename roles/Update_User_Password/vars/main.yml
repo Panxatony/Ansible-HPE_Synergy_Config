@@ -1,0 +1,4 @@
+---
+config: '{{ playbook_dir }}/config.json'
+User_Password: 'password123456'
+User_Username: 'NewUser'

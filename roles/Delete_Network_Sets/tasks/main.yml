@@ -1,8 +1,8 @@
 # Created by thopper91 (2017)
- 
+
 - name: Delete the Network Set
   oneview_network_set:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: absent
     data:
       name: "{{ Network-Set-One }}"

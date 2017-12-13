@@ -1,0 +1,6 @@
+---
+build_plan_name: 'RHEL-7.3-generalize-2017-03-23'
+config: '{{ playbook_dir }}/config.json'
+Golden_Image_Description: ' HPE Golden Image for testing OS Deployment. This Golden Image includes a UEFI System Partition and a GRUB loader having a simple configuration to show a message on the server console at boot.'
+Golden_Image_Name: 'RHEL7.3'
+serverprofile: 'Profile name'

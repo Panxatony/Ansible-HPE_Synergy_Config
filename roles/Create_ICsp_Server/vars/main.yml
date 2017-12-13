@@ -1,0 +1,10 @@
+---
+config: '{{ playbook_dir }}/config.json'
+Serv_bay: 'serverName, #'
+
+## ICSP
+ICSP_Host: '10.0.0.0'
+ICSP_Username: 'user'
+ICSP_Password: 'password'
+ilo_Username: 'another_username'
+ilo_Password: 'another_password'

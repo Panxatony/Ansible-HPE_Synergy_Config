@@ -1,20 +1,20 @@
 # Created by thopper91 (2017)
- 
+
 - name: Create a basic connection-less server profile template (using names)
   oneview_server_profile:
     config: "{{ config }}"
     state: "present"
     data:
-        name: "{{ Prof_Name }}"
-        description: "{{ Prof_Description }}"
+        name: "{{ ProfileName }}"
+        description: "{{ ProfileDescription }}"
       sanStorage:
         hostOSType: 'VMware (ESXi)'
         manageSanStorage: true
         volumeAttachments:
           - id: 1
-            volumeName: "{{ Vol_Name_1 }}"
-            volumeStoragePoolName: "{{ Vol_Stor_Pool5 }}"
-            volumeStorageSystemName: "{{ Vol_Stor_Sys }}"
+            volumeName: "{{ VolumeName }}"
+            volumeStoragePoolName: "{{ VolumeStoragePool }}"
+            volumeStorageSystemName: "{{ VolumeStorageSystem }}"
             lunType: "Auto"
             lun: 0
             storagePaths:

@@ -1,65 +1,52 @@
 # Created by thopper91 (2017)
- 
-#
-# Gather information and store as local variables
-#
+
 - name: Gather facts about deployment network & Store variable
   oneview_ethernet_network_facts:
-#    config: "{{ config }}"
-    name: "{{ Deploy_NET }}"
-
+    config: "{{ config }}"
+    name: "{{ DeploymentNetwork }}"
 - set_fact: NET_Deploy_Uri="{{ ethernet_networks[0].uri }}"
-##
+
 - name: Gather facts about customer VLAN network & Store variable
   oneview_ethernet_network_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ Cust_VLAN }}"
-
 - set_fact: NET_VLANCust_Uri="{{ ethernet_networks[0].uri }}"
-##
+
 - name: Gather facts about Management VLAN network & Store variable
   oneview_ethernet_network_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ Man_VLAN }}"
-
 - set_fact: NET_VLANMan_Uri="{{ ethernet_networks[0].uri }}"
-##
+
 - name: Gather facts about DMZ VLAN network & Store variable
   oneview_ethernet_network_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ DMZ_VLAN }}"
-
 - set_fact: NET_VLANDMZ_Uri="{{ ethernet_networks[0].uri }}"
-##
+
 - name: Gather facts about San A network & Store variable
   oneview_fc_network_facts:
-#    config: "{{ config }}"
-    name: "{{ NET_SAN_A }}"
-
+    config: "{{ config }}"
+    name: "{{ NetworkSanA }}"
 - set_fact: NET_SAN_A_Uri="{{ fc_networks[0].uri }}"
-##
+
 - name: Gather facts about San A network & Store variable
   oneview_fc_network_facts:
-#    config: "{{ config }}"
-    name: "{{ NET_SAN_B }}"
-
+    config: "{{ config }}"
+    name: "{{ NetworkSanB }}"
 - set_fact: NET_SAN_B_Uri="{{ fc_networks[0].uri }}"
-#
-# Produce LIG
-#
+
 - name: Ensure that the Logical Interconnect Group is present
   oneview_logical_interconnect_group:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
-      name: "{{ LIG_name }}"
+      name: "{{ LIGName }}"
       enclosureIndexes: [1]
-      enclosureType: "{{ Encl_Type }}"
+      enclosureType: "{{ EnclosureType }}"
       interconnectBaySet: 3
       redundancyType: "Redundant"
-#
-# Now for the interconnect connections
-#
+### Now for the interconnect connections
       interconnectMapTemplate:
         interconnectMapEntryTemplates:
           - logicalDownlinkUri: ~
@@ -78,9 +65,7 @@
                     - relativeValue: 1
                       type: "Enclosure"
             permittedInterconnectTypeName: "{{ InterconType40 }}"
-#
-# This is the Uplink Set code. Everytime logical Port Config Infos appears, its a new uplink. For visual aid, a single '#' will be used to break up the code
-#
+### This is the Uplink Set code. Everytime logical Port Config Infos appears, its a new uplink. For visual aid, a single '#' will be used to break up the code
       uplinkSets:
         - logicalPortConfigInfos:
           - desiredSpeed: "Auto"
@@ -88,7 +73,7 @@
                   locationEntries:
                     - relativeValue: 6
                       type: "Bay"
-                    - relativeValue: "{{ Port_Q1_1 }}"
+                    - relativeValue: "{{ Port1 }}"
                       type: "Port"
                     - relativeValue: 1
                       type: "Enclosure"
@@ -97,23 +82,22 @@
                   locationEntries:
                     - relativeValue: 6
                       type: "Bay"
-                    - relativeValue: "{{ Port_Q2_1 }}"
+                    - relativeValue: "{{ Port2 }}"
                       type: "Port"
                     - relativeValue: 1
                       type: "Enclosure"
-          name: "{{ Uplink_SAN_B }}"
+          name: "{{ UplinkSanB }}"
           mode: "Auto"
           networkType: "FibreChannel" #Ethernet is the other option
           networkUris:
             - "{{ NET_SAN_B_Uri }}"
-#
         - logicalPortConfigInfos:
           - desiredSpeed: "Auto"
             logicalLocation:
                   locationEntries:
                     - relativeValue: 3
                       type: "Bay"
-                    - relativeValue: "{{ Port_Q2_1 }}"
+                    - relativeValue: "{{ Port2 }}"
                       type: "Port"
                     - relativeValue: 1
                       type: "Enclosure"
@@ -122,16 +106,15 @@
                   locationEntries:
                     - relativeValue: 3
                       type: "Bay"
-                    - relativeValue: "{{ Port_Q1_1 }}"
+                    - relativeValue: "{{ Port1 }}"
                       type: "Port"
                     - relativeValue: 1
                       type: "Enclosure"
-          name: "{{ Uplink_SAN_A }}"
+          name: "{{ UplinkSanA }}"
           mode: "Auto"
           networkType: "FibreChannel" #Ethernet / FibreChannel are the options
           networkUris:
             - "{{ NET_SAN_A_Uri }}"
-#
         - logicalPortConfigInfos:
           - desiredSpeed: "Auto"
             logicalLocation:
@@ -142,12 +125,11 @@
                       type: "Port"
                     - relativeValue: 1
                       type: "Enclosure"
-          name: "{{ Uplink_Deploy }}"
+          name: "{{ UplinkDeploy }}"
           mode: "Auto"
           networkType: "Ethernet" #Ethernet / FibreChannel are the options
           networkUris:
             - "{{ NET_Deploy_Uri }}"
-#
         - logicalPortConfigInfos:
           - desiredSpeed: "Auto"
             logicalLocation:
@@ -185,7 +167,7 @@
                       type: "Port"
                     - relativeValue: 1
                       type: "Enclosure"
-          name: "{{ Uplink_LAN }}"
+          name: "{{ UplinkLAN }}"
           mode: "Auto"
           networkType: "Ethernet" #Ethernet / FibreChannel are the options
           networkUris:

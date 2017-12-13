@@ -1,7 +1,7 @@
 # Created by thopper91 (2017)
- 
+
 - name: Gather facts about all Enclosures
   oneview_enclosure_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ Enclosure }}"
 - debug: var=enclosures

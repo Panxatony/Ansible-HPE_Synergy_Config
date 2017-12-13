@@ -1,0 +1,3 @@
+---
+config: '{{ playbook_dir }}/config.json'
+FC_Network: 'Name of FC Network'

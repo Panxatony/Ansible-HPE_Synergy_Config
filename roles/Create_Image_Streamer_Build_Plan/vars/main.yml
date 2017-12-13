@@ -1,0 +1,11 @@
+---
+build_plan_name: 'RHEL-7.3-generalize-2017-03-23'
+build_plan_description: ' Remove personalization settings from RHEL 7.3. (c) Copyright 2017 Hewlett Packard Enterprise Development LP Licensed under the Apache License, Version 2.0 (the "License")'
+config: '{{ playbook_dir }}/config.json'
+
+### Image Streamer
+plan_script_1: 'RHEL-7.3-mount-generalize-2017-03-15'
+plan_script_2: 'RHEL-7.3-generalize-host-2017-03-15'
+plan_script_3: 'RHEL-7.3-generalize-users-2017-03-15'
+plan_script_4: 'RHEL-7.3-generalize-network-2017-03-15'
+plan_script_5: 'RHEL-7.3-unmount-generalize-2017-03-15'

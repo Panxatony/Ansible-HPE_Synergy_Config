@@ -1,0 +1,3 @@
+---
+config: '{{ playbook_dir }}/config.json'
+Enclosure_Group: 'SYN-TEST-EG' #End in EG for Enclosure Group

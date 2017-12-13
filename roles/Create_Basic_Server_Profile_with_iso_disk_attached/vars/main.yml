@@ -1,0 +1,14 @@
+---
+CentOS7Atomic: 'http://centos7.iso' #Input link to your Centos 7 iso
+config: '{{ playbook_dir }}/config.json'
+Cust_VLAN: 'VLAN for Customer'
+Enclosure_Group: 'SYN-Test-EG' # Synergy-Test-EnclosureGroup
+iloAddress: '0.0.0.3'
+ilo_Password: 'password'
+ilo_Username: 'thopper91'
+Local_Stor_Name: 'Storage name for local storage'
+Man_VLAN: 'VLAN for Management'
+Prof_Description: 'Insert a description for this profile'
+Prof_Name: 'Profile Name'
+Serv_bay: 'enclosure name, bay 1'
+Serv_Type480: 'SY 480 Gen9 1' #660 is the alternative at the moment

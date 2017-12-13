@@ -1,9 +1,5 @@
 # Created by thopper91 (2017)
 
-- name: Include vars for OpenShift
-  include_vars:
-    file: OpenShift.yml
-
 - name: Gather facts on "{{ plan_script_1 }}"
   image_streamer_plan_script_facts:
     config: "{{ config }}"

@@ -2,7 +2,7 @@
 
 - name: Update '{{ Subnet_Name }}' Subent with the new Domain: '{{ IPv4_NewDomain }}'
   oneview_id_pools_ipv4_subnet:
-  #  config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
       name: "{{ Subnet_Name }}"

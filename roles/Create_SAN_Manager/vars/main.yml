@@ -1,0 +1,6 @@
+---
+config: '{{ playbook_dir }}/config.json'
+SanManagerHost: '0.0.0.8' #IP for SAN Manager
+SanManagerPassword: 'FredFlinstone' # Password for SAN
+SanManagerPort: '1234'
+SanManagerUsername: 'Ted' # Username for SAN

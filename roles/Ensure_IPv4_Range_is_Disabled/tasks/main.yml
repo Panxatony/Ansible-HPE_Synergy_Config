@@ -2,14 +2,13 @@
 
 - name: Gather facts about '{{ Subnet_Name }}' IPV4 Subnet
   oneview_id_pools_ipv4_subnet_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ Subnet_Name }}"
-
 - set_fact: subnet_uri="{{ id_pools_ipv4_subnets[0].uri }}"
 
 - name: Ensure the IPv4 '{{ Range_Name }}' Range is disabled
   oneview_id_pools_ipv4_range:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
       name: "{{ Range_Name }}"

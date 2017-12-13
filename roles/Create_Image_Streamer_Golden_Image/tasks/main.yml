@@ -1,15 +1,10 @@
 # Created by thopper91 (2017)
 
-- name: Include vars for OpenShift
-  include_vars:
-    file: OpenShift.yml
-
 - name: Gather facts about a Server Profile by name
   oneview_server_profile_facts:
     config: "{{ config }}"
-    name: "{{ server_profile }}"
+    name: "{{ serverprofile }}"
   delegate_to: localhost
-
 - set_fact: OsVolumeUri="{{ server_profiles[0].osDeploymentSettings.osVolumeUri }}"
 
 - name: Add a Golden Image from OS Volume

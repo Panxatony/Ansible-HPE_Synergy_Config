@@ -1,29 +1,29 @@
 # Created by thopper91 (2017)
- 
+
 - name: Gather facts about all Storage Pools
   oneview_storage_pool_facts:
-#    config: "{{ config }}"
-    name: "{{Vol_Stor_Pool5 }}"
+    config: "{{ config }}"
+    name: "{{ ServerPool }}"
 - set_fact: Vol_Stor_Pool5_uri="{{ storage_pools[0].uri }}"
 
 - name: Gather facts about all Storage Systems
   oneview_storage_system_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
   delegate_to: localhost
 - set_fact: Vol_Stor_Sys_Uri="{{ storage_systems[0].uri }}"
 
 - name: Create ESXi Shared Data Volume
   oneview_volume:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
-      name: "{{ Vol_Name_1 }}"
+      name: "{{ Vol_Name }}"
       description: "{{ Vol_Tem_Description }}"
       raidLevel: "RAID5"
       provisioningParameters:
           provisionType: 'Thin' #Thin or Full
           shareable: True
-          requestedCapacity: "{{ c50Gb }}"
+          requestedCapacity: "{{ memory }}"
           storagePoolUri: "{{ Vol_Stor_Pool5_uri }}"
       storageSystemUri: "{{ Vol_Stor_Sys_Uri }}"
       snapshotPoolUri: "{{ Vol_Stor_Pool5_uri }}"

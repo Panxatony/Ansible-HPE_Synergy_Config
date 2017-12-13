@@ -1,0 +1,3 @@
+---
+config: '{{ playbook_dir }}/config.json'
+Artifact_Bundle_Name: 'Name of Artifact Bundle'

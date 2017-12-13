@@ -1,0 +1,7 @@
+---
+config: '{{ playbook_dir }}/config.json'
+Cust_VLAN: 'Customer VLAN'
+DMZ_VLAN: 'DMZ VLAN'
+Man_VLAN: 'Management VLAN'
+NetworkSetOne: 'Network Set name'
+NetworkSetTwo: 'Network Set name'

@@ -1,0 +1,5 @@
+---
+config: '{{ playbook_dir }}/config.json'
+Enclosure: 'Enclosure_Name'
+EnclosureGroup: 'SYN-Test-EG'
+LogicalEnclosure: 'SYN-Test-LE'

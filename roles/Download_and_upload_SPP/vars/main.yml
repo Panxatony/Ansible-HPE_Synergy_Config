@@ -1,0 +1,5 @@
+---
+userName: 'hoppert'
+Logical_Encl: 'SYN-DBPOC-LE'
+SPPfile: 'SPP_2017.07.20170920_for_HPE_Synergy_Z7550-96436.iso'
+WebserverIP: '10.0.4.219/test'

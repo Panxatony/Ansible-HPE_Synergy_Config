@@ -1,0 +1,4 @@
+---
+config: '{{ playbook_dir }}/config.json'
+Range_Name: 'Range'
+Subnet_Name: 'Subnet'

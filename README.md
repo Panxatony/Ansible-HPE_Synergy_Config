@@ -24,6 +24,15 @@ Something also to take note, Ansible is very 'white-space' sensitive, which mean
 - [Atom](https://github.com/thopper91/Ansible-HPE_Synergy_Config/wiki/Atom)
 - [Microsoft Visual Studio Code](https://github.com/thopper91/Ansible-HPE_Synergy_Config/wiki/Microsoft-Visual-Studio-Code)
 
+I have a set of executable Ansible playbooks here, however that is not the full extent of what I have produced. So if you would like to create a new playbook, its in the same format as these however the role will be different. It will require the role name from the 'roles' folder:
+```yml
+---
+- hosts: all
+  connection: local
+  roles:
+    - {role: NEW_ROLE_NAME}
+```
+
 #### Add/Create Playbooks
 - [Appliance Time and Locale Configuration](../master/roles/Appliance_Time_and_Locale_Configuration/tasks/main.yml)
 - [Attach ISO disk to ILO and server bay](../master/roles/Attach_disk_to_ILO/tasks/main.yml)
@@ -84,6 +93,7 @@ Something also to take note, Ansible is very 'white-space' sensitive, which mean
 - [Gather Enclosure Groups](../master/roles/Gather_Enclosure_Groups/tasks/main.yml)
 - [Gather Ethernet Networks](../master/roles/Gather_Ethernet_Networks/tasks/main.yml)
 - [Gather Fibre Channel Networks](../master/roles/Gather_FC_Networks/tasks/main.yml)
+- [Gather Firmware Drivers](../master/roles/Gather_Firmware_Drivers/tasks/main.yml)
 - [Gather Hardware Facts](../master/roles/Gather_Hardware_Facts/tasks/main.yml)
 - [Gather Image Streamer Artifact Bundle](../master/roles/Gather_Image_Streamer_Artifact_Bundle/tasks/main.yml)
 - [Gather Image Streamer Build Plans](../master/roles/Gather_Image_Streamer_Build_Plans/tasks/main.yml)
@@ -105,6 +115,7 @@ Something also to take note, Ansible is very 'white-space' sensitive, which mean
 
 #### Other Playbooks
 - [Download Artifact Bundle](../master/roles/Download_Artifact_Bundles/tasks/main.yml)
+- [Download and use SPP file](../master/roles/Download_and_upload_SPP/tasks/main.yml)
 - [Ensure IPv4 Range is Disabled](../master/roles/Ensure_IPv4_Range_is_Disabled/tasks/main.yml)
 - [Ensure IPv4 Range is Enabled](../master/roles/Ensure_IPv4_Range_is_Enabled/tasks/main.yml)
 - [ICsp OS Deployment](../master/roles/ICsp_OS_Deployment/tasks/main.yml)

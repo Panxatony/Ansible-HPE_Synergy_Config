@@ -1,16 +1,8 @@
 # Created by thopper91 (2017)
- 
-# Include all variable files in the vars folder
-#
-#- name: Include all variable files
-#  include_vars:
-#    dir: 'vars' #change directory if needed
-#    extensions:
-#        - yml
 
 - name: Create a Storage System with 3 managed pool
   oneview_storage_system:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
         credentials:
@@ -31,5 +23,4 @@
             type: StoragePoolV2
             name: "{{ Vol_Stor_Pool6 }}"
             deviceType: FC
-
   delegate_to: localhost

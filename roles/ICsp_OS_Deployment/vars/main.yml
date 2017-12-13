@@ -1,0 +1,8 @@
+---
+config: '{{ playbook_dir }}/config.json'
+OS_BuildPlan: 'Jeffs_attempt_ProLiant OS - ESXi 6.5 Scripted Install'
+Serv_bay: 'SERVERNAME, #'
+
+ICSP_Host: '0.0.0.5'
+ICSP_Password: 'password24'
+ICSP_Username: 'MyUser'

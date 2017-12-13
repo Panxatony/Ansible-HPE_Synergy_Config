@@ -1,9 +1,9 @@
 # Created by thopper91 (2017)
- 
+
 - name: Gather facts about all Storage Pools
   oneview_storage_pool_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
 #If wanting to Gather the information via its name rather than ALL Pools, then include the line of code below with relevant name
-#    name: "{{ Vol_Stor_Pool1 }}"
+    name: "{{ Vol_Stor_Pool1 }}"
 
 - debug: var=storage_pools

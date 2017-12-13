@@ -1,0 +1,7 @@
+---
+config: '{{ playbook_dir }}/config.json'
+IPv4_Domain: 'awesome.com'
+IPv4_Gateway: '10.10.1.1'
+IPv4SubnetMask: '10.10.4.0'
+SubnetID: 'Subnet ID in OneView'
+SubnetName: '10.10.10.10'

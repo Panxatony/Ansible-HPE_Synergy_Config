@@ -1,0 +1,7 @@
+---
+config: '{{ playbook_dir }}/config.json'
+ProfileDescription: 'Input information on profile'
+ProfileName: 'My name is...'
+VolumeName: 'Volume 1'
+VolumeStoragePoolName: 'Name'
+VolumeStorageSystem: 'Storage System name

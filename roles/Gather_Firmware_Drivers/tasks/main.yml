@@ -1,0 +1,11 @@
+- name: Include all variable files
+  include_vars:
+    dir: 'vars' #change directory if needed
+    extensions:
+        - yml
+
+- name: Gather facts on all Firmware Drivers
+  oneview_firmware_driver_facts:
+    config: "{{ config }}"
+
+- debug: var=firmware_drivers

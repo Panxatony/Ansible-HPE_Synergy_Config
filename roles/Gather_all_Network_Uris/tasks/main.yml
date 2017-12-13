@@ -1,44 +1,38 @@
 # Created by thopper91 (2017)
- 
+
 ### Gather information and store as local variables
 - name: Gather facts about deployment network & Store variable
   oneview_ethernet_network_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ Deploy_NET }}"
-
 - set_fact: NET_Deploy_Uri="{{ ethernet_networks[0].uri }}"
 ##
 - name: Gather facts about customer VLAN network & Store variable
   oneview_ethernet_network_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ Cust_VLAN }}"
-
 - set_fact: NET_VLANCust_Uri="{{ ethernet_networks[0].uri }}"
 ##
 - name: Gather facts about Management VLAN network & Store variable
   oneview_ethernet_network_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ Man_VLAN }}"
-
 - set_fact: NET_VLANMan_Uri="{{ ethernet_networks[0].uri }}"
 ##
 - name: Gather facts about DMZ VLAN network & Store variable
   oneview_ethernet_network_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ DMZ_VLAN }}"
-
 - set_fact: NET_VLANDMZ_Uri="{{ ethernet_networks[0].uri }}"
 ##
 - name: Gather facts about San A network & Store variable
   oneview_fc_network_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ NET_SAN_A }}"
-
 - set_fact: NET_SAN_A_Uri="{{ fc_networks[0].uri }}"
 ##
 - name: Gather facts about San A network & Store variable
   oneview_fc_network_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ NET_SAN_B }}"
-
 - set_fact: NET_SAN_B_Uri="{{ fc_networks[0].uri }}"

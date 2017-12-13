@@ -1,0 +1,3 @@
+---
+config: '{{ playbook_dir }}/config.json'
+Plan_Script_Name: 'RHEL-7.3-mount-generalize-2017-03-15'

@@ -1,9 +1,9 @@
 # Created by thopper91 (2017)
- 
+
 - name: Gather facts about a Server Hardware by name
   oneview_server_hardware_facts:
-#    config:  "{{ config }}"
-    name: "{{ Serv_b1 }}"
+    config:  "{{ config }}"
+    name: "{{ Serv_bay }}"
   delegate_to: localhost
 - set_fact: Serv_Bay_ip="{{ server_hardwares[0].mpHostInfo.mpIpAddresses[1].address }}"
 
@@ -13,5 +13,5 @@
     username: "{{ ICSP_Username }}"
     password: "{{ ICSP_Password }}"
     server_ipAddress: "{{ Serv_Bay_ip }}"
-    os_build_plan: "Jeffs_attempt_ProLiant OS - ESXi 6.5 Scripted Install"
+    os_build_plan: "{{ OS_BuildPlan }}"
   delegate_to: localhost

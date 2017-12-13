@@ -1,25 +1,23 @@
 # Created by thopper91 (2017)
- 
+
 - name: Gather facts about VLAN DMZ Network
   oneview_ethernet_network_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ Man_VLAN }}"
 
 - set_fact: NET_VLANMan_Uri="{{ ethernet_networks[0].uri }}"
 
 - name: Create an ESXi 6.5 profile
   oneview_server_profile:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
       name: "{{ Prof_Name }}"
       description: "{{ Prof_Description }}"
-      server_hardware: "{{ Serv_b2 }}"
-      serverHardwareTypeName: "{{ Serv_Type660 }}"
+      server_hardware: "{{ Serv_bay }}"
+      serverHardwareTypeName: "{{ Serv_Type }}"
       enclosureGroupName: "{{ Enclosure_Group }}"
-#
-# This function of code is for the image streamer. If not needed, remove
-#
+### This function of code is for the image streamer. If not needed, remove
       osDeploymentSettings:
         osDeploymentPlanName: "Zoly - deploy esxi 6.5"
         osCustomAttributes:
@@ -47,15 +45,11 @@
              value: "{{ IP_Address }}"
           -  name: ManagementNIC.gateway
              value: "{{ IP_Gateway }}"
-#
-# Boot mode is requred
-#
+### Boot mode is requred
       bootMode:
         manageMode: True
         mode: "UEFI"
-#
-# Next is the BIOS. If BIOS is needed, managebios needs to be True otherwise do not put the code in...default is false. The over-ridden settings are the items changed from the default
-#
+### Next is the BIOS. If BIOS is needed, managebios needs to be True otherwise do not put the code in...default is false. The over-ridden settings are the items changed from the default
       bios:
         manageBios: "true"
         overriddenSettings:
@@ -73,9 +67,7 @@
             value: "MaxPerf"
           - id: "VirtualInstallDisk"
             value: "Enabled"
-#
-# Network connections. FC are required for the SAN storages. The two lines of code commented out are there if the mezzamine has more than 4 ports
-#
+### Network connections. FC are required for the SAN storages. The two lines of code commented out are there if the mezzamine has more than 4 ports
       connections:
         - id: 1
           name: "{{ Deploy_NET }}"
@@ -135,16 +127,14 @@
           networkName: "{{ NET_SAN_B }}"
           boot:
             priority: "NotBootable"
-#
-#SAN Storage. The LUN starts at 0 with increments of 1. the names are important, its what the SAN was labelled as in Volumes.
-#
+### SAN Storage. The LUN starts at 0 with increments of 1. the names are important, its what the SAN was labelled as in Volumes.
       sanStorage:
         hostOSType: 'VMware (ESXi)'
         manageSanStorage: true
         volumeAttachments:
           - id: 1
             volumeName: "{{ Vol_Name_1 }}"
-            volumeStoragePoolName: "{{ Vol_Stor_Pool5 }}"
+            volumeStoragePoolName: "{{ Vol_Stor_Pool }}"
             volumeStorageSystemName: "{{ Vol_Stor_Sys }}"
             lunType: "Auto"
             lun: 0
@@ -157,7 +147,7 @@
                 storageTargetType: 'Auto'
           - id: 2
             volumeName: "{{ Vol_Name_2 }}"
-            volumeStoragePoolName: "{{ Vol_Stor_Pool5 }}"
+            volumeStoragePoolName: "{{ Vol_Stor_Pool }}"
             volumeStorageSystemName: "{{ Vol_Stor_Sys }}"
             lunType: "Auto"
             lun: 1
@@ -168,15 +158,13 @@
               - isEnabled: true
                 connectionId: 7 #SAN-B
                 storageTargetType: 'Auto'
-#
-# Now to power on the server in which the profile is on
-#
+
 - name: Power On the server hardware
   oneview_server_hardware:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: power_state_set
     data:
-        name : "{{ Serv_b2 }}" #The Server HW name
+        name : "{{ Serv_bay }}" #The Server HW name
         powerStateData:
             powerState: "On"
             powerControl: "MomentaryPress" #MomentaryPress and PressAndHold are the two options

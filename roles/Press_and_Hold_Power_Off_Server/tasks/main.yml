@@ -1,11 +1,11 @@
 # Created by thopper91 (2017)
- 
+
 - name: Power Off the server hardware
   oneview_server_hardware:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: power_state_set
     data:
-        name : "{{ Serv_b5 }}" #Choose a bay to turn off
+        name : "{{ Serv_bay }}" #Choose a bay to turn off
         powerStateData:
             powerState: "Off"
             powerControl: "PressAndHold"

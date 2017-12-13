@@ -1,17 +1,17 @@
 # Created by thopper91 (2017)
 
-#- name: Include all variable files
-#  include_vars:
-#    dir: 'vars' #change directory if needed
-#    extensions:
-#        - yml
+- name: Include all variable files
+  include_vars:
+    dir: 'vars' #change directory if needed
+    extensions:
+        - yml
 
 - name: Power Off the server hardware
   oneview_server_hardware:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: power_state_set
     data:
-        name : "{{ Serv_b3}}" #Choose a bay and server to turn on
+        name : "{{ Serv_bay }}" #Choose a bay and server to turn on
         powerStateData:
             powerState: "Off"
             powerControl: "MomentaryPress"
@@ -19,8 +19,8 @@
 
 - name: Gather facts about a Server Hardware by name
   oneview_server_hardware_facts:
-#    config:  "{{ config }}"
-    name: "{{ Serv_b3 }}"
+    config:  "{{ config }}"
+    name: "{{ Serv_bay }}"
   delegate_to: localhost
 - set_fact: iloAddress="{{ server_hardwares[0].mpHostInfo.mpIpAddresses[1].address }}"
 
@@ -35,10 +35,10 @@
 
 - name: Power On the server hardware
   oneview_server_hardware:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: power_state_set
     data:
-        name : "{{ Serv_b3 }}" #Choose a bay and server to turn on
+        name : "{{ Serv_bay }}" #Choose a bay and server to turn on
         powerStateData:
             powerState: "On"
             powerControl: "MomentaryPress"

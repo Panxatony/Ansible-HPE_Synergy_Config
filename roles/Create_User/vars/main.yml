@@ -1,0 +1,8 @@
+---
+config: '{{ playbook_dir }}/config.json'
+User_emailAddress: 'bob.the.builder@dxc.com'
+User_Fullname: 'Bob'
+User_mobilePhone: '+ 44(0) 123 456'
+User_officePhone: '+ 44(0) 456 789'
+User_Password: 'password01'
+User_Username: 'Bob123'

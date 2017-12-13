@@ -1,0 +1,6 @@
+---
+config: '{{ playbook_dir }}/config.json'
+ServerPool: 'FC_r20'
+memory: '107374182400' #This is 100Gb
+Vol_Tem_Name: 'Volume Template Name'
+Vol_Tem_Description: 'Insert a great description!'

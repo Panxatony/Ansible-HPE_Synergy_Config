@@ -1,0 +1,6 @@
+---
+config: '{{ playbook_dir }}/config.json'
+IPv4EndAddress: '10.10.4.50'
+IPv4StartAddress: '10.10.4.2'
+RangeName: 'Range 1'
+SubnetName: '10.10.10.10'

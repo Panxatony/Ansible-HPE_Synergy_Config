@@ -2,7 +2,7 @@
  
 - name: Gather facts about a Managed SAN by name
   oneview_managed_san_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ SAN_A }}"
   delegate_to: localhost
 - set_fact: San_A_uri="{{ managed_sans[0].uri }}"
@@ -10,7 +10,7 @@
 
 - name: Gather facts about a Managed SAN by name
   oneview_managed_san_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ SAN_B }}"
   delegate_to: localhost
 - set_fact: San_B_uri="{{ managed_sans[0].uri }}"

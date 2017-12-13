@@ -1,0 +1,10 @@
+---
+config: '{{ playbook_dir }}/config.json'
+Vol_Stor_Pool1: 'FC-1'
+Vol_Stor_Pool5: 'FC-5'
+Vol_Stor_Pool6: 'FC-6'
+
+## Login details
+STOR_Sys_Host: '0.0.0.6'
+STOR_Sys_Password: '3par password'
+STOR_Sys_Username: '3par username'

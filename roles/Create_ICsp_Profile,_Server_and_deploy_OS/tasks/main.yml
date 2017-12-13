@@ -1,40 +1,26 @@
 # Created by thopper91 (2017)
 
-# Include all variable files in the vars folder
-#
-#- name: Include all variable files
-#  include_vars:
-#    dir: 'vars' #change directory if needed
-#    extensions:
-#        - yml
-#
-# Gather information
-#
 - name: Gather facts about a Server Hardware by name
   oneview_server_hardware_facts:
-#    config:  "{{ config }}"
-    name: "{{ Serv_b1 }}"
+    config:  "{{ config }}"
+    name: "{{ Serv_bay }}"
   delegate_to: localhost
 - set_fact: Serv_Bay_ip="{{ server_hardwares[0].mpHostInfo.mpIpAddresses[1].address }}"
 
 - debug:
    msg: "Just gathered relevant information :) Lets create the Profile in OneView first"
-#
-# Begin the creation of profile
-#
+
 - name: Create Profile with Local Storage
   oneview_server_profile:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
       name: "{{ Prof_Name }}"
       description: "{{ Prof_Description }}"
-      server_hardware: "{{ Serv_b1 }}"
-      serverHardwareTypeName: "{{ Serv_Type660 }}"
+      server_hardware: "{{ Serv_bay }}"
+      serverHardwareTypeName: "{{ Serv_Type }}"
       enclosureGroupName: "{{ Enclosure_Group }}"
-#
-# Boot mode and Setting are requred
-#
+### Boot mode and Setting are requred
       bootMode:
         manageMode: True
         mode: "BIOS"
@@ -46,11 +32,8 @@
         - "USB"
         - "HardDisk"
         - "PXE"
-#
-# BIOS.
-# If BIOS is needed, managebios needs to be True otherwise default is false.
+# BIOS. If BIOS is needed, managebios needs to be True otherwise default is false.
 # The over-written settings are the items changed from the default
-#
       bios:
         manageBios: "true"
         overriddenSettings:
@@ -68,9 +51,7 @@
             value: "MaxPerf"
           - id: "VirtualInstallDisk"
             value: "Enabled"
-#
-# Local Storage
-#
+### Local Storage
       localStorage:
         controllers:
           - deviceSlot: "Embedded"
@@ -83,10 +64,7 @@
                 numPhysicalDrives: 2
                 driveTechnology: "null"
                 bootable: true
-#
-# Network connections.
-# FC networks are required for the SAN storages
-#
+### Network connections. FC networks are required for the SAN storages
       connections:
         - id: 1
           name: "{{ Man_VLAN }}"
@@ -104,22 +82,18 @@
           networkName: "{{ Cust_VLAN }}"
           boot:
             priority: "NotBootable"
-#
-# Power on Server Profile
-#
+
 - name: Power On the server hardware
   oneview_server_hardware:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: power_state_set
     data:
-        name : "{{ Serv_b3 }}" #The Server HW name
+        name : "{{ Serv_bay }}" #The Server HW name
         powerStateData:
             powerState: "On"
             powerControl: "MomentaryPress" #MomentaryPress and PressAndHold are the two options
   delegate_to: localhost
-#
-#
-#
+
 - debug:
    msg: "Profile created, now creating a server in ICsp"
 

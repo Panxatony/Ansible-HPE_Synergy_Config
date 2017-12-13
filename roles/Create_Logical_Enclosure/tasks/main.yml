@@ -1,32 +1,24 @@
 # Created by thopper91 (2017)
- 
-#- name: Include all variable files
-#  include_vars:
-#    dir: 'vars' #change directory if needed
-#    extensions:
-#        - yml
 
 - name: Gather facts about Enclosure Groups
   oneview_enclosure_group_facts:
-#    config: "{{ config }}"
-    name: "{{ Enclosure_Group }}"
+    config: "{{ config }}"
+    name: "{{ EnclosureGroup }}"
   delegate_to: localhost
 - set_fact: enclosure_group_uri="{{ enclosure_groups[0].uri }}"
-#
-#
+
 - name: Gather facts and store enclosure information
   oneview_enclosure_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ Enclosure }}"
 - set_fact: enclosures_uri="{{ enclosures[0].uri }}"
-#
-#
+
 - name: Create a Logical Enclosure (available only on HPE Synergy)
   oneview_logical_enclosure:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
         enclosureUris:
           - "{{ enclosures_uri }}"
         enclosureGroupUri: "{{ enclosure_group_uri }}"
-        name: "{{ Logical_Encl }}"
+        name: "{{ LogicalEnclosure }}"

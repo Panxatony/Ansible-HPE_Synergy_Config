@@ -1,22 +1,21 @@
 # Created by thopper91 (2017)
- 
+
 - name: Gather facts about Enclosure Group
   oneview_enclosure_group_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ Enclosure_Group }}"
   delegate_to: localhost
 - set_fact: Encl_Group_Uri="{{ enclosure_groups[0].uri }}"
 
 - name: Gather facts about Deployment network uri
   oneview_ethernet_network_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ Deploy_NET }}"
 - set_fact: NET_Deploy_Uri="{{ ethernet_networks[0].uri }}"
-#
-#
+###
 - name: Ensure that Enclosure Group is present using the default configuration
   oneview_enclosure_group:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
       name: "{{ Enclosure_Group }}"
@@ -35,15 +34,11 @@
         - interconnectBay: 5
         - interconnectBay: 6
           logicalInterconnectGroupUri: "{{ Encl_Group_Uri }}" #  SYN-DBPOC-EG
-#
-# IP Section: Uri is the Management IP added in settings...NOT in Networks
-#
+### IP Section: Uri is the Management IP added in settings...NOT in Networks
       ipAddressingMode: "IpPool"
       ipRangeUris:
         - "{{ IP_Range_Uri }}"
-#
-# OS Deploment Settings
-#
+### OS Deploment Settings
       osDeploymentSettings:
         manageOSDeployment: true
         deploymentModeSettings:

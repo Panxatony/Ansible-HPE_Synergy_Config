@@ -1,8 +1,8 @@
 # Created by thopper91 (2017)
- 
+
 - name: Create Ethernet network for VLAN DMZ
   oneview_ethernet_network:
-#    config: '{{ config }}'
+    config: '{{ config }}'
     state: present
     data:
       name: '{{ Net_Eth_Name }}'

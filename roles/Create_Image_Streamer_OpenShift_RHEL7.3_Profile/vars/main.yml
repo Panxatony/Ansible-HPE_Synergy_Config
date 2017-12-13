@@ -1,0 +1,21 @@
+---
+config: '{{ playbook_dir }}/config.json'
+ContainVLAN: 'Container VLAN'
+DeploymentNetwork: 'Deployment Network Name'
+deploy_plan_name: 'HPE - Foundation 1.0 - create empty OS Volume-2017-03-15'
+Enclosure_Group: 'Syn-Test-EG'
+NetworkSanA: 'SAN-A'
+NetworkSanB: 'SAN-B'
+ProfileDescription: 'Profile to install RedHat 7.3'
+ProfileName: 'RHEL-7.3-Capture'
+RHEL7.3: 'https://iptoRHEL.iso'
+Serv_bay: 'ServerName, #'
+ServerType: 'SY 480 Gen9 1' # alternative at the moment is 660 (rest remains, just replace 480 with 660)
+VolumeName: 'Capture RHEl'
+VolumeStoragePoolName: 'Name'
+VolumeStorageSystem: 'Storage System name'
+
+### Login details
+iloAddress: '10.20.10.1'
+iloPassword: 'Password'
+iloUsername: 'Username'

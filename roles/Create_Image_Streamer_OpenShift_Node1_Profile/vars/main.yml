@@ -1,0 +1,24 @@
+---
+config: '{{ playbook_dir }}/config.json'
+ContainVLAN: 'Container VLAN'
+DeploymentNetwork: 'Deployment Network Name'
+Enclosure_Group: 'Syn-Test-EG'
+LocalStorageName1: 'Storage 1'
+LocalStorageName2: 'Storage 2'
+NetworkSanA: 'SAN-A'
+NetworkSanB: 'SAN-B'
+Node1Name: 'OCP-Node1'
+ProfileDescription: 'REDHAT OpenShift Node Profile'
+Serv_bay: 'ServerName, #'
+Serv_Type: 'SY 480 Gen9 1' # alternative at the moment is 660 (rest remains, just replace 480 with 660)
+
+### OS Deployment
+deploy_plan_name: 'RHEL_7.3_OCP_Base_deploy'
+domain: 'awesome.uk'
+IpDns1: '30.1.0.1'
+IpDns2: '30.1.0.2'
+IpGateway: '10.0.1.0'
+IpNetmask: '255.255.255.0'
+newUser: 'User3'
+Node1IpAddress: '10.0.0.0'
+Node1domainName: 'node2'

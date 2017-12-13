@@ -1,0 +1,4 @@
+---
+config: '{{ playbook_dir }}/config.json'
+Prof_Name: 'Profile'
+Serv_bay: 'ServerName, #'

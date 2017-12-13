@@ -1,7 +1,7 @@
 # Created by thopper91 (2017)
- 
+
 - name: Gather facts about a Fibre Channel Network by name
   oneview_fc_network_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ FC_Network }}"
 - debug: var=fc_networks

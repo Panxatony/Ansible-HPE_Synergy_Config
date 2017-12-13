@@ -1,0 +1,15 @@
+---
+config: '{{ playbook_dir }}/config.json'
+Cust_VLAN: 'Customer VLAN'
+DMZ_VLAN: 'DMZ VLAN'
+Enclosure_Group: 'SYN-Test-EG'
+Man_VLAN: 'Management VLAN'
+NetworkSanA: 'SAN-A'
+NetworkTypeEthernet: 'Ethernet'
+NetworkTypeFibreChannel: 'FibreChannel'
+ProfileDescription: 'Give me information'
+ProfileTemplateName: 'Name'
+Serv_Type: 'SY 480 Gen9 1' # alternative at the moment is 660 (rest remains, just replace 480 with 660)
+VolumeName: 'Volume 1'
+VolumeStoragePoolName: 'Name'
+VolumeStorageSystem: 'Storage System name'

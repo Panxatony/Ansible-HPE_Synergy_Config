@@ -1,9 +1,9 @@
 # Created by thopper91 (2017)
- 
+
 ### Add Users
 - name: Ensure that the User is present using the default configuration
   oneview_user:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
       enabled: true
@@ -32,10 +32,10 @@
 ### Add IPv4 Subnet
 - name: Add IPv4 '{{ Subnet_Name }}' Subnet
   oneview_id_pools_ipv4_subnet:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
-      name: "{{ Subnet_Name }}"
+      name: "{{ SubnetName }}"
       type: "Subnet"
       networkId: "{{ SubnetID }}" #Subnet ID in OneView
       subnetmask: "{{ SubnetMask }}"
@@ -47,17 +47,17 @@
 ## Gather this information
 - name: Gather facts about '{{ Subnet_Name }}' IPV4 Subnets
   oneview_id_pools_ipv4_subnet_facts:
-#    config: "{{ config }}"
-    name: "{{ Subnet_Name }}"
+    config: "{{ config }}"
+    name: "{{ SubnetName }}"
 - set_fact: subnet_uri="{{ id_pools_ipv4_subnets[0].uri }}"
 
 ### Create Range for Subnet
 - name: Add IPv4 '{{ Range_Name }}' Range
   oneview_id_pools_ipv4_range:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
-      name: "{{ Range_Name }}"
+      name: "{{ RangeName }}"
       subnetUri: "{{ subnet_uri }}"
       type: "Range"
       rangeCategory: "Custom"
@@ -68,10 +68,10 @@
 ### Ensure the Range is enabled
 - name: Ensure the IPv4 '{{ Range_Name }}' Range is enabled
   oneview_id_pools_ipv4_range:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
-      name: "{{ Range_Name }}"
+      name: "{{ RangeName }}"
       subnetUri: "{{ subnet_uri }}"
       enabled: True
   delegate_to: localhost
@@ -79,7 +79,7 @@
 ### Need to setup the SAN
 - name: Creates a Device Manager for the Brocade SAN provider with the given hostname and credentials
   oneview_san_manager:
-#    config: '{{ config }}'
+    config: '{{ config }}'
     state: present
     data:
       providerDisplayName: 'Brocade Network Advisor'
@@ -98,7 +98,7 @@
 ### Create Storage system with 3 pools
 - name: Create a Storage System with 3 managed pool
   oneview_storage_system:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
         credentials:
@@ -125,7 +125,7 @@
 ### Gather SAN Information
 - name: Gather facts about SAN A
   oneview_managed_san_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ SAN_A }}"
   delegate_to: localhost
 
@@ -133,7 +133,7 @@
 
 - name: Gather facts about SAN B
   oneview_managed_san_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ SAN_B }}"
   delegate_to: localhost
 
@@ -142,7 +142,7 @@
 ### Create a set of networks
 - name: Create Ethernet network for VLAN DMZ
   oneview_ethernet_network:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
       name: "{{ DMZ_VLAN }}"
@@ -156,7 +156,7 @@
 
 - name: Create Ethernet network for VLAN Management
   oneview_ethernet_network:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
       name: "{{ Man_VLAN }}"
@@ -170,7 +170,7 @@
 
 - name: Create Ethernet network for VLAN Customer
   oneview_ethernet_network:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
       name: "{{ Cust_VLAN }}"
@@ -184,7 +184,7 @@
 
 - name: Create Ethernet network for Management (Synergy)
   oneview_ethernet_network:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
       name: "{{ Man_NET }}"
@@ -199,7 +199,7 @@
 
 - name: Create Ethernet network for Deployment (Synergy)
   oneview_ethernet_network:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
       name: "{{ Deploy_NET }}"
@@ -213,7 +213,7 @@
 
 - name: Create Fibre Channel network
   oneview_fc_network:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
       name: "{{ NET_SAN_A }}"
@@ -224,7 +224,7 @@
 
 - name: Create Fibre Channel network
   oneview_fc_network:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
       name: "{{ NET_SAN_B }}"
@@ -235,7 +235,7 @@
 
 - name: Create a Network Set
   oneview_network_set:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
       name: "{{ NET_Set_One }}"
@@ -244,7 +244,7 @@
 
 - name: Create a Network Set
   oneview_network_set:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
       name: "{{ NET_Set_Two }}"
@@ -255,50 +255,44 @@
 ### Gather information and store as local variables
 - name: Gather facts about deployment network & Store variable
   oneview_ethernet_network_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ Deploy_NET }}"
-
 - set_fact: NET_Deploy_Uri="{{ ethernet_networks[0].uri }}"
-##
+
 - name: Gather facts about customer VLAN network & Store variable
   oneview_ethernet_network_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ Cust_VLAN }}"
-
 - set_fact: NET_VLANCust_Uri="{{ ethernet_networks[0].uri }}"
-##
+
 - name: Gather facts about Management VLAN network & Store variable
   oneview_ethernet_network_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ Man_VLAN }}"
-
 - set_fact: NET_VLANMan_Uri="{{ ethernet_networks[0].uri }}"
-##
+
 - name: Gather facts about DMZ VLAN network & Store variable
   oneview_ethernet_network_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ DMZ_VLAN }}"
-
 - set_fact: NET_VLANDMZ_Uri="{{ ethernet_networks[0].uri }}"
-##
+
 - name: Gather facts about San A network & Store variable
   oneview_fc_network_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ NET_SAN_A }}"
-
 - set_fact: NET_SAN_A_Uri="{{ fc_networks[0].uri }}"
-##
+
 - name: Gather facts about San A network & Store variable
   oneview_fc_network_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ NET_SAN_B }}"
-
 - set_fact: NET_SAN_B_Uri="{{ fc_networks[0].uri }}"
 
 ### Produce LIG
 - name: Ensure that the Logical Interconnect Group is present
   oneview_logical_interconnect_group:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
       name: "{{ LIG_name }}"
@@ -351,7 +345,6 @@
           networkType: "FibreChannel" #Ethernet is the other option
           networkUris:
             - "{{ NET_SAN_B_Uri }}"
-#
         - logicalPortConfigInfos:
           - desiredSpeed: "Auto"
             logicalLocation:
@@ -376,7 +369,6 @@
           networkType: "FibreChannel" #Ethernet / FibreChannel are the options
           networkUris:
             - "{{ NET_SAN_A_Uri }}"
-#
         - logicalPortConfigInfos:
           - desiredSpeed: "Auto"
             logicalLocation:
@@ -392,7 +384,6 @@
           networkType: "Ethernet" #Ethernet / FibreChannel are the options
           networkUris:
             - "{{ NET_Deploy_Uri }}"
-#
         - logicalPortConfigInfos:
           - desiredSpeed: "Auto"
             logicalLocation:
@@ -441,14 +432,14 @@
 ### Gather LIG information
 - name: Gather facts about all Logical Interconnect Groups
   oneview_logical_interconnect_group_facts:
-#    config: "{{ config }}"
-    name: "SYN-DBPOC-LIG"
+    config: "{{ config }}"
+    name: "{{ LIG_name }}"
 - set_fact: LIG_Uri="{{ logical_interconnect_groups[0].uri }}"
 
 ### Create Enclosure Group
 - name: Ensure that Enclosure Group is present using the default configuration
   oneview_enclosure_group:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
       name: "{{ Enclosure_Group }}"
@@ -481,21 +472,20 @@
 ### Gather information on Enclosure Groups
 - name: Gather facts about all Enclosure Groups
   oneview_enclosure_group_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ Enclosure_Group }}"
   delegate_to: localhost
 - set_fact: Encl_group_uri="{{ enclosure_groups[0].uri }}"
 
 - name: Gather facts about all Enclosures
   oneview_enclosure_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ Enclosure }}"
-
 - set_fact: enclosures_uri="{{ enclosures[0].uri }}"
 
 - name: Create a Logical Enclosure (available only on HPE Synergy)
   oneview_logical_enclosure:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
         enclosureUris:

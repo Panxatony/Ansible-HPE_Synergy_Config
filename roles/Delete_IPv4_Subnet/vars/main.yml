@@ -1,0 +1,4 @@
+---
+config: '{{ playbook_dir }}/config.json'
+NET_Eth_Name: 'Ethernet Network'
+Subnet_Name: 'Subnet'

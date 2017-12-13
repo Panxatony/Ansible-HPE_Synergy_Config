@@ -1,0 +1,43 @@
+---
+- name: Include all variable files
+  include_vars:
+    dir: 'vars' #change directory if needed
+    extensions:
+        - yml
+
+- name: Download relevant SPP
+  get_url:
+    url: http://{{ WebserverIP }}/{{ SPPfile }}
+    dest: /home/{{ userName }}/{{ SPPfile }}
+    validate_certs: False
+
+- name: Upload the firmware file to Oneview
+  oneview_firmware_bundle:
+    config: "{{ config }}"
+    state: present
+    file_path: /home/{{ userName }}/{{ SPPfile }}
+
+- name: Gather firmware name
+  oneview_firmware_driver_facts:
+    config: "{{ config }}"
+  delegate_to: localhost
+- set_fact: firmwareName="{{ firmware_drivers[0].name }}"
+
+- name: Gather Uri on Firmware
+  oneview_firmware_driver_facts:
+    config: "{{ config }}"
+    name: "{{ firmwareName }}"
+  delegate_to: localhost
+- set_fact: firmwareUri="{{ firmware_drivers[0].uri }}"
+
+- name: Update the firmware for the {{ Logical_Encl }} Logical Enclosure
+  oneview_logical_enclosure:
+    config: "{{ config }}"
+    state: firmware_updated
+    data:
+        name: "{{ Logical_Encl }}"
+        firmware:
+            firmwareBaselineUri: "{{ firmwareUri }}"
+            firmwareUpdateOn: "EnclosureOnly"
+            forceInstallFirmware: "false"
+  delegate_to: localhost

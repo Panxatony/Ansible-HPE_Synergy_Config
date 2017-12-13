@@ -1,30 +1,29 @@
 # Created by thopper91 (2017)
- 
+
 - name: Gather facts about all Storage Pools
   oneview_storage_pool_facts:
-#    config: "{{ config }}"
-    name: "{{ Vol_Stor_Pool5 }}"
-- set_fact: Vol_Stor_Pool5_uri="{{ storage_pools[0].uri }}"
+    config: "{{ config }}"
+    name: "{{ VolumeStoragePool }}"
+- set_fact: VolumeStoragePoolUri="{{ storage_pools[0].uri }}"
 
 - name: Gather facts about all Storage Systems
   oneview_storage_system_facts:
-#    config: "{{ config }}"
-#  delegate_to: localhost
-- set_fact: Vol_Stor_Sys_Uri="{{ storage_systems[0].uri }}"
+    config: "{{ config }}"
+- set_fact: VolumeStorageSystemUri="{{ storage_systems[0].uri }}"
 
 - name: Create Private Volume
   oneview_volume:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
-      name: '{{ Vol_Name_1}}'
-      description: '{{ Vol_Tem_Description}}'
+      name: '{{ VolumeName }}'
+      description: '{{ VolumeDescription }}'
       raidLevel: "RAID5"
       provisioningParameters:
-          provisionType: 'Thin' #Thin or Full
+          provisionType: "{{ Type }}"
           shareable: False
-          requestedCapacity: "{{ c20Gb }}"
-          storagePoolUri: "{{ Vol_Stor_Pool5_uri }}"
-      storageSystemUri: "{{ Vol_Stor_Sys_Uri }}"
-      snapshotPoolUri: "{{ Vol_Stor_Pool5_uri }}"
+          requestedCapacity: "{{ memory }}"
+          storagePoolUri: "{{ VolumeStoragePoolUri }}"
+      storageSystemUri: "{{ VolumeStorageSystemUri }}"
+      snapshotPoolUri: "{{ VolumeStoragePoolUri }}"
   delegate_to: localhost

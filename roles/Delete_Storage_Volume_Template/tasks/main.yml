@@ -1,8 +1,8 @@
 # Created by thopper91 (2017)
- 
+
 - name: Delete the Storage Volume Template
   oneview_storage_volume_template:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: absent
     data:
         name: "{{ Vol_Tem_Name }}"

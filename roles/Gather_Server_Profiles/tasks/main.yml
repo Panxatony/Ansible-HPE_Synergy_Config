@@ -1,15 +1,15 @@
 # Created by thopper91 (2017)
- 
+
 - name: Gather facts about all Server Profiles
   oneview_server_profile_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
   delegate_to: localhost
 
 - debug: var=server_profiles
 
 - name: Gather facts about a Server Profile by name
   oneview_server_profile_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ Prof_Name }}"
   delegate_to: localhost
 

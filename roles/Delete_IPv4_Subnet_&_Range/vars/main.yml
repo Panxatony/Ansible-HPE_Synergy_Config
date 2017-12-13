@@ -1,0 +1,5 @@
+---
+config: '{{ playbook_dir }}/config.json'
+NET_Eth_Name: 'Ethernet Network'
+Range_Name: 'Range'
+Subnet_Name: 'Subnet'

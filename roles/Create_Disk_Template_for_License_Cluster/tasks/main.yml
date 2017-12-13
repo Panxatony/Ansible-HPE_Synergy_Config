@@ -1,22 +1,22 @@
 # Created by thopper91 (2017)
- 
+
 - name: Gather facts about all Storage Pools
   oneview_storage_pool_facts:
-#    config: "{{ config }}"
-    name: "FC_r1"
+    config: "{{ config }}"
+    name: "{{ ServerPool }}"
 
 - set_fact: Vol_Stor_Pool1_uri="{{ storage_pools[0].uri }}"
 
 - name: Gather facts about all Storage Systems
   oneview_storage_system_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
   delegate_to: localhost
 
 - set_fact: Vol_Stor_Sys_Uri="{{ storage_systems[0].uri }}"
 
 - name: Create a Storage Volume Template
   oneview_storage_volume_template:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
         name: "{{ Vol_Tem_Name }}"
@@ -25,7 +25,7 @@
         provisioning:
              shareable: false
              provisionType: "Thin"
-             capacity: "{{ c700Gb }}" #700GB
+             capacity: "{{ memory }}" #700GB
              storagePoolUri: "{{ Vol_Stor_Pool1_uri }}"
         stateReason: "None"
         storageSystemUri: "{{ Stor_System_Uri }}" #REA-3PAR01

@@ -1,42 +1,34 @@
 # Created by thopper91 (2017)
 
-### Include all variable files in the vars folder
-- name: Include all variable files
-  include_vars:
-    dir: 'vars' #change directory if needed
-    extensions:
-        - yml
-
 ### Gather Network URI
-- name: Gather facts about Ethernet Networks by name
+- name: Gather URI information on {{ ContainVLAN }}
   oneview_ethernet_network_facts:
-#    config: "{{ config }}"
-    name: "{{ Contain_VLAN }}"
+    config: "{{ config }}"
+    name: "{{ ContainVLAN }}"
 - set_fact: Network_uri="{{ ethernet_networks[0].uri }}"
 
 ### Gather Server Hardware Uri
-- name: Gather facts about a Server Hardware by name
+- name: Gather Uri on {{ Serv_bay }} bay
   oneview_server_hardware_facts:
-#    config:  "{{ config }}"
-    name: "{{ Serv_b5 }}"
+    config:  "{{ config }}"
+    name: "{{ Serv_bay }}"
   delegate_to: localhost
-
 - set_fact: Server_HW="{{ server_hardwares[0].uri }}"
 
 ### Begin the creation of profile
-- name: Create "{{ IS_RHEL7.3_Name }}" profile for Openshift
+- name: Create "{{ ProfileName }}" profile for Openshift
   oneview_server_profile:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
-      name: "{{ IS_RHEL7.3_Name }}"
-      description: "{{ IS_cap_prof_Description }}"
+      name: "{{ ProfileName }}"
+      description: "{{ ProfileDescription }}"
       serverHardwareUri: "{{ Server_HW }}"
-      serverHardwareTypeName: "{{ Serv_Type480 }}"
-      enclosureGroupName: "{{ Enclosure_Group }}"
+      serverHardwareTypeName: "{{ ServerType }}"
+      enclosureGroupName: "{{ EnclosureGroup }}"
 ### This function of code is for the image streamer. If not needed, remove
       osDeploymentSettings:
-        osDeploymentPlanName: "{{ deploy_plan_name2 }}"
+        osDeploymentPlanName: "{{ deploy_plan_name }}"
         osCustomAttributes:
           -  name: VolumeSize
              value: "20000"
@@ -55,9 +47,9 @@
         manageSanStorage: true
         volumeAttachments:
           - id: 1
-            volumeName: "{{ Vol_Name_1 }}"
-            volumeStoragePoolName: "{{ Vol_Stor_Pool5 }}"
-            volumeStorageSystemName: "{{ Vol_Stor_Sys }}"
+            volumeName: "{{ VolumeName }}"
+            volumeStoragePoolName: "{{ VolumeStoragePoolName }}"
+            volumeStorageSystemName: "{{ VolumeStorageSystem }}"
             lunType: "Auto"
             lun: 0
             isBootVolume: "true"
@@ -68,55 +60,53 @@
               - isEnabled: true
                 connectionId: 4 #SAN-B
                 storageTargetType: 'Auto'
-# Network connections.
-# FC networks are required for the SAN storages
+### Network connections. FC networks are required for the SAN storages
       connections:
         - id: 1
-          name: "{{ Deploy_NET }}"
+          name: "{{ DeploymentNetwork }}"
           functionType: "Ethernet"
           portId: "Mezz 3:1-a"
           requestedMbps: 2500 #2.5Gb
-          networkName: "{{ Deploy_NET }}"
+          networkName: "{{ DeploymentNetwork }}"
           boot:
             priority: "Primary" #used as it is an iSCSi network
         - id: 2
-          name: "{{ Contain_VLAN }}"
+          name: "{{ ContainVLAN }}"
           functionType: "Ethernet"
           portId: "Mezz 3:1-c"
           requestedMbps: 2500 #2.5Gb
-          networkName: "{{ Contain_VLAN }}"
+          networkName: "{{ ContainVLAN }}"
           boot:
             priority: "NotBootable"
         - id: 3
-          name: "{{ NET_SAN_A }}"
+          name: "{{ NetworkSanA }}"
           functionType: "FibreChannel"
           portId: "Mezz 3:1-b"
           requestedMbps: 2500 #2.5Gb
-          networkName: "{{ NET_SAN_A }}"
+          networkName: "{{ NetworkSanA }}"
           boot:
             priority: "NotBootable"
         - id: 4
-          name: "{{ NET_SAN_B }}"
+          name: "{{ NetworkSanB }}"
           functionType: "FibreChannel"
           portId: "Mezz 3:2-b"
           requestedMbps: 2500 #2.5Gb
-          networkName: "{{ NET_SAN_B }}"
+          networkName: "{{ NetworkSanB }}"
           boot:
             priority: "NotBootable"
 
-### Gather relevant information for ilo Address and attach iso to profile
 - name: Gather facts about a Server Hardware by name
   oneview_server_hardware_facts:
-#    config:  "{{ config }}"
-    name: "{{ Serv_b5 }}"
+    config:  "{{ config }}"
+    name: "{{ Serv_bay }}"
   delegate_to: localhost
 - set_fact: iloAddress="{{ server_hardwares[0].mpHostInfo.mpIpAddresses[1].address }}"
 
 - name: Attach CentOS Atomic 7 iso to Profile
   hpilo_boot:
     host: "{{ iloAddress }}"
-    login: "{{ ilo_Username }}"
-    password: "{{ ilo_Password }}"
+    login: "{{ iloUsername }}"
+    password: "{{ iloPassword }}"
     media: cdrom
     image: "{{ RHEL7.3 }}"
   delegate_to: localhost
@@ -124,10 +114,10 @@
 # Power on Server Profile
 - name: Power On the server hardware
   oneview_server_hardware:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: power_state_set
     data:
-        name : "{{ Serv_b5 }}" #The Server HW name
+        name : "{{ Serv_bay }}" #The Server HW name
         powerStateData:
             powerState: "On"
             powerControl: "MomentaryPress" #MomentaryPress and PressAndHold are the two options

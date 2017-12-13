@@ -1,12 +1,12 @@
 # Created by thopper91 (2017)
- 
+
 - name: Gather facts about all Users
   oneview_user_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
 - debug: var=users
 
 - name: Gather facts about a User by name
   oneview_user_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ User_Username }}"
 - debug: var=users

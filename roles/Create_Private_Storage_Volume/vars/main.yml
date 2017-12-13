@@ -1,0 +1,8 @@
+---
+config: '{{ playbook_dir }}/config.json'
+memory: '53687091200' # This is 50Gb
+Type: 'Thin' # Full alternative
+VolumeDescription: 'Volume information'
+VolumeName: 'Volume 1'
+VolumeStoragePoolName: 'Name'
+VolumeStorageSystem: 'Storage System name'

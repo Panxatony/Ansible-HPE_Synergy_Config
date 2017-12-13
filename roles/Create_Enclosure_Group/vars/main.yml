@@ -1,0 +1,5 @@
+---
+config: '{{ playbook_dir }}/config.json'
+Deploy_NET: 'Deployment Network'
+Encl_Description: 'Description about the enclosure'
+Enclosure_Group: 'SYN-Test-EG' # Synergy-Test-EnclosureGroup

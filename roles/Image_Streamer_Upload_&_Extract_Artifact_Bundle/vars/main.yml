@@ -1,0 +1,4 @@
+---
+config: '{{ playbook_dir }}/config.json'
+pather_user: 'thopper91'
+Sample_Artifact_Bundle: 'HPE-RHEL-7.3-2017-06-02-v3.0.zip'

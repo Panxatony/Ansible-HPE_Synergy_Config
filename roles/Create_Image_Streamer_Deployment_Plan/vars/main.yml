@@ -1,0 +1,5 @@
+---
+build_plan_name: 'RHEL-7.3-generalize-2017-03-23'
+config: '{{ playbook_dir }}/config.json'
+Deployment_plan_description: 'insert description here'
+Deployment_plan_name: ' RHEL-7.3-personalize-and-configure-NICs-LVM-BP-2017-09-21'

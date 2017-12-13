@@ -1,0 +1,4 @@
+---
+config: '{{ playbook_dir }}/config.json'
+IPv4_NewDomain: 'awesome.com'
+Subnet_Name: 'Subnet-Test'

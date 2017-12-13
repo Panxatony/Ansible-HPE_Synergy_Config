@@ -1,8 +1,8 @@
 # Created by thopper91 (2017)
- 
+
 - name: Create Ethernet networks in bulk
   oneview_ethernet_network:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
       vlanIdRange: '10,11,12'

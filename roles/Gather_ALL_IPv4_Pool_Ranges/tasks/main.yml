@@ -1,14 +1,12 @@
 # Created by thopper91 (2017)
- 
+
 - name: Gather facts about all ID Pools IPV4 Ranges
   oneview_id_pools_ipv4_range_facts:
-  #  config: "{{ config }}"
-
+    config: "{{ config }}"
 - debug: var=id_pools_ipv4_ranges
 
 - name: Gather facts about '{{ Range_Name }}' IPV4 Range
   oneview_id_pools_ipv4_range_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ Range_Name }}"
-
 - debug: var=id_pools_ipv4_ranges

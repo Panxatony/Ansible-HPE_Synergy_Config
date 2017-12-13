@@ -1,8 +1,8 @@
 # Created by thopper91 (2017)
- 
+
 - name: Gather facts about all Managed SANs
   oneview_managed_san_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
   delegate_to: localhost
 
 - debug: var=managed_sans

@@ -1,0 +1,10 @@
+---
+config: '{{ playbook_dir }}/config.json'
+Cust_VLAN: 'Customer VLAN'
+Enclosure_Group: 'SYN-Test-EG'
+Local_Stor_Name: 'Name for local storage'
+Man_VLAN: 'Management VLAN'
+Prof_Name: 'Name'
+Prof_Description: 'Give me a description!'
+Serv_bay: 'Servername, #'
+Serv_Type: 'SY 480 Gen9 1' # alternative at the moment is 660 (rest remains, just replace 480 with 660)

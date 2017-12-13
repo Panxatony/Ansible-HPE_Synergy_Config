@@ -1,0 +1,14 @@
+---
+config: '{{ playbook_dir }}/config.json'
+DeploymentNetwork: 'Deployment Network Name'
+Enclosure_Group: 'Syn-Test-EG'
+Man_VLAN: 'Management VLAN'
+NetworkSanA: 'SAN-A'
+NetworkSanB: 'SAN-B'
+ProfileName: 'The Greatest Profile'
+ProfileDescription: 'Give me a description, something relevant'
+Serv_bay: 'Servername, #'
+Serv_Type: 'SY 480 Gen9 1' # alternative at the moment is 660 (rest remains, just replace 480 with 660)
+VolumeName: 'Volume 1'
+VolumeStoragePool: 'Name'
+VolumeStorageSystem: 'Storage System name'

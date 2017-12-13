@@ -1,20 +1,20 @@
 # Created by thopper91 (2017)
- 
+
 - name: Create a Network Set
   oneview_network_set:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
-      name: "{{ NET_Set_One }}"
+      name: "{{ NetworkSetOne }}"
       networkUris: #From this point on, choose the networks needed (Ethernet)
         - "{{ Cust_VLAN }}"
 
 - name: Create a Network Set
   oneview_network_set:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
-      name: "{{ NET_Set_Two }}"
+      name: "{{ NetworkSetTwo }}"
       networkUris: #From this point on, choose the networks needed (Ethernet)
         - "{{ DMZ_VLAN }}"
         - "{{ Man_VLAN }}"

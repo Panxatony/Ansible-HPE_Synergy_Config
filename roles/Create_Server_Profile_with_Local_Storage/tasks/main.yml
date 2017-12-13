@@ -1,33 +1,27 @@
 # Created by thopper91 (2017)
- 
+
 - name: Create Profile with Local Storage
   oneview_server_profile:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
       name: "{{ Prof_Name }}"
       description: "{{ Prof_Description }}"
-      server_hardware: "{{ Serv_b3 }}"
-      serverHardwareTypeName: "{{ Serv_Type480 }}"
+      server_hardware: "{{ Serv_bay }}"
+      serverHardwareTypeName: "{{ Serv_Type }}"
       enclosureGroupName: "{{ Enclosure_Group }}"
-#
-# Boot mode is requred
-#
+### Boot mode is requred
       bootMode:
         manageMode: True
         mode: "UEFI"
         pxeBootPolicy: "Auto"
-#
-# Change the boot to PXE boot. Default is Hard Disk
-#
+### Change the boot to PXE boot. Default is Hard Disk
       boot:
         manageBoot: True
         order:
         - "HardDisk"
 #        - "PXE"
-#
-# Next is the BIOS. If BIOS is needed, managebios needs to be True otherwise do not put the code in...default is false. The over-ridden settings are the items changed from the default
-#
+### Next is the BIOS. If BIOS is needed, managebios needs to be True otherwise do not put the code in...default is false. The over-ridden settings are the items changed from the default
       bios:
         manageBios: "true"
         overriddenSettings:
@@ -43,9 +37,7 @@
             value: "Disabled"
           - id: "EnergyPerfBias"
             value: "MaxPerf"
-#
-# Local Storage
-#
+### Local Storage
       localStorage:
         controllers:
           - deviceSlot: "Embedded"
@@ -58,9 +50,7 @@
                 numPhysicalDrives: 2
                 driveTechnology: "SasHdd"
                 bootable: true
-#
-# Network connections. FC are required for the SAN storages. The two lines of code commented out are there if the mezzamine has more than 4 ports
-#
+### Network connections. FC are required for the SAN storages. The two lines of code commented out are there if the mezzamine has more than 4 ports
       connections:
         - id: 1
           name: "{{ Man_VLAN }}"
@@ -78,15 +68,13 @@
           networkName: "{{ Cust_VLAN }}"
           boot:
             priority: "NotBootable"
-#
-# Now to power on the server in which the profile is on
-#
+### Now to power on the server in which the profile is on
 - name: Power On the server hardware
   oneview_server_hardware:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: power_state_set
     data:
-        name : "{{ Serv_b4 }}" #The Server HW name
+        name : "{{ Serv_bay }}" #The Server HW name
         powerStateData:
             powerState: "On"
             powerControl: "MomentaryPress" #MomentaryPress and PressAndHold are the two options

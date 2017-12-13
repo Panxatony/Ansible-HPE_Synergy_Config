@@ -1,0 +1,6 @@
+---
+config: '{{ playbook_dir }}/config.json'
+NET_SAN_A: 'SAN-A'
+NET_SAN_B: 'SAN-B'
+SAN_A: 'SAN-A'
+SAN_B: 'SAN-B'

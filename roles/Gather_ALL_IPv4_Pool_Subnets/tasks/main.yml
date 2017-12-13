@@ -1,14 +1,14 @@
 # Created by thopper91 (2017)
- 
+
 - name: Gather facts about all ID Pools IPV4 Subnets
   oneview_id_pools_ipv4_subnet_facts:
-  #  config: "{{ config }}"
+    config: "{{ config }}"
 
 - debug: var=id_pools_ipv4_subnets
 
 - name: Gather facts about "{{ Subnet_Name }}" IPV4 Subnet
   oneview_id_pools_ipv4_subnet_facts:
-  #  config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ Subnet_Name }}"
 
 - debug: var=id_pools_ipv4_subnets

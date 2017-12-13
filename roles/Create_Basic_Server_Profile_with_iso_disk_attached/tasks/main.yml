@@ -1,28 +1,17 @@
 # Created by thopper91 (2017)
 
-# Include all variable files in the vars folder
-#
-#- name: Include all variable files
-#  include_vars:
-#    dir: 'vars' #change directory if needed
-#    extensions:
-#        - yml
-#
-# Begin the creation of profile
-#
+### Begin the creation of profile
 - name: Create Profile with Local Storage
   oneview_server_profile:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
       name: "{{ Prof_Name }}"
       description: "{{ Prof_Description}}"
-      server_hardware: "{{ Serv_b3 }}"
-      serverHardwareTypeName: "{{ Serv_Type480 }}"
+      server_hardware: "{{ Serv_bay }}"
+      serverHardwareTypeName: "{{ Serv_Type }}"
       enclosureGroupName: "{{ Enclosure_Group }}"
-#
-# Boot mode and Setting are requred
-#
+### Boot mode and Setting are requred
       bootMode:
         manageMode: True
         mode: "UEFI"
@@ -31,11 +20,9 @@
         manageBoot: True
         order:
         - "HardDisk"
-#
 # BIOS.
 # If BIOS is needed, managebios needs to be True otherwise default is false.
 # The over-written settings are the items changed from the default
-#
       bios:
         manageBios: "true"
         overriddenSettings:
@@ -53,9 +40,7 @@
             value: "MaxPerf"
           - id: "VirtualInstallDisk"
             value: "Enabled"
-#
-# Local Storage
-#
+### Local Storage
       localStorage:
         controllers:
           - deviceSlot: "Embedded"
@@ -68,10 +53,8 @@
                 numPhysicalDrives: 2
                 driveTechnology: "SasHdd"
                 bootable: true
-#
 # Network connections.
 # FC networks are required for the SAN storages
-#
       connections:
         - id: 1
           name: "{{ Man_VLAN }}"
@@ -89,13 +72,12 @@
           networkName: "{{ Cust_VLAN }}"
           boot:
             priority: "NotBootable"
-#
-# Gather relevant information for ilo Address and attach iso to profile
-#
+
+### Gather relevant information for ilo Address and attach iso to profile
 - name: Gather facts about a Server Hardware by name
   oneview_server_hardware_facts:
-#    config:  "{{ config }}"
-    name: "{{ Serv_b3 }}"
+    config:  "{{ config }}"
+    name: "{{ Serv_bay }}"
   delegate_to: localhost
 - set_fact: iloAddress="{{ server_hardwares[0].mpHostInfo.mpIpAddresses[1].address }}"
 
@@ -107,12 +89,11 @@
     media: cdrom
     image: "{{ CentOS7Atomic }}"
   delegate_to: localhost
-#
-# Power on Server Profile
-#
+
+### Power on Server Profile
 - name: Power On the server hardware
   oneview_server_hardware:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: power_state_set
     data:
         name : "{{ Serv_b3 }}" #The Server HW name

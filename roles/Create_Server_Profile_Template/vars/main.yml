@@ -1,0 +1,14 @@
+---
+config: '{{ playbook_dir }}/config.json'
+DeploymentNetwork: 'Deployment Network Name'
+Description: 'Fill me with Information!'
+DMZ_VLAN: 'DMZ VLAN'
+Enclosure_Group: 'Syn-Test-EG'
+NetworkSanA: 'SAN-A'
+NetworkTypeEthernet: 'Ethernet'
+NetworkTypeFibreChannel: 'FibreChannel'
+Serv_Type: 'SY 480 Gen9 1' # alternative at the moment is 660 (rest remains, just replace 480 with 660)
+TemplateName: 'Name of template'
+VolumeName: 'Volume 1'
+VolumeStoragePoolName: 'Name'
+VolumeStorageSystem: 'Storage System name'

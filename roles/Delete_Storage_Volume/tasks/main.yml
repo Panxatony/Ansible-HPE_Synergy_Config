@@ -1,8 +1,8 @@
 # Created by thopper91 (2017)
- 
+
 - name: Delete the volume previously created with a Storage Pool
   oneview_volume:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: absent
     data:
-      name: "{{ Vol_Name_1 }}"
+      name: "{{ Vol_Name }}"

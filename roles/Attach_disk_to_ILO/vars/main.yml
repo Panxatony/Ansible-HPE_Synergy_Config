@@ -1,0 +1,6 @@
+---
+config: '{{ playbook_dir }}/config.json'
+iloAddress: '0.0.0.3'
+ilo_Password: 'password'
+ilo_Username: 'thopper91'
+Serv_bay: 'enclousre name, bay 3'

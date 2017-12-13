@@ -1,22 +1,21 @@
 # Created by thopper91 (2017)
- 
+
 ### Before deleting the profile, need to ensure the server is off
 - name: Power Off the server hardware
   oneview_server_hardware:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: power_state_set
     data:
-        name : "{{ Serv_b4 }}" #Select a bay
+        name : "{{ Serv_bay }}" #Select a bay
         powerStateData:
             powerState: "Off"
             powerControl: "PressAndHold" #MomentaryPress and PressAndHold are the two options
   delegate_to: localhost
-#
-# Now remove said profile
-#
+
+### Now remove said profile
 - name: Delete Server profile (average deletion = 2mins)
   oneview_server_profile:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: "absent"
     data:
         name: "{{ Prof_Name}}"

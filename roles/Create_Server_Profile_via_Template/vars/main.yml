@@ -1,0 +1,5 @@
+---
+config: '{{ playbook_dir }}/config.json'
+Prof_Description: 'Give me a description buddy!'
+Prof_Name: 'Name of Profile'
+Prof_Tem_Name: 'Name of Template you want to inherit'

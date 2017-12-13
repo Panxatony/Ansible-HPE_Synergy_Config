@@ -1,0 +1,9 @@
+---
+config: '{{ playbook_dir }}/config.json'
+Prof_Name: 'Profile Name'
+Serv_bay: 'enclosure name, bay 1'
+Vol_Name_1: 'ESXi-Shared-Vol-Data01'
+Vol_Name_2: 'ESXi-Shared-Vol-Log-01'
+Vol_Name_3: 'Private Volume for OS'
+Vol_Stor_Pool: 'FC_r200'
+Vol_Stor_Sys: 'Storage System name'

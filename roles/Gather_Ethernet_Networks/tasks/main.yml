@@ -1,12 +1,12 @@
 # Created by thopper91 (2017)
- 
+
 - name: Gather facts about all Ethernet Networks
   oneview_ethernet_network_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
 - debug: var=ethernet_networks
 
 - name: Gather facts about Ethernet Networks by name
   oneview_ethernet_network_facts:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     name: "{{ Eth_Network }}"
 - debug: var=ethernet_networks

@@ -1,0 +1,17 @@
+---
+config: '{{ playbook_dir }}/config.json'
+Cust_VLAN: 'Customer VLAN'
+Enclosure_Group: 'SYN-Test-EG'
+Local_Stor_Name: 'OS'
+Man_VLAN: 'Management VLAN'
+Prof_Description: 'Insert description here for a server profile'
+Prof_Name: 'Server Profile'
+Serv_bay: 'serverName, #'
+Serv_Type: 'SY 660 Gen9 1'
+
+## ICSP
+ICSP_Host: '10.0.0.0'
+ICSP_Username: 'user'
+ICSP_Password: 'password'
+ilo_Username: 'another_username'
+ilo_Password: 'another_password'

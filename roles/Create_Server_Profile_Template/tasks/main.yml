@@ -1,13 +1,13 @@
 # Created by thopper91 (2017)
- 
+
 - name: Create a basic connection-less server profile template (using names)
   oneview_server_profile_template:
     config: "{{ config }}"
     state: present
     data:
-      name: "{{ Prof_Tem_Name }}"
-      description: "{{ Prof_Description }}"
-      serverHardwareTypeName: "{{ Serv_Type480 }}"
+      name: "{{ TemplateName }}"
+      description: "{{ Description }}"
+      serverHardwareTypeName: "{{ Serv_Type }}"
       enclosureGroupName: "{{ Enclosure_Group }}"
       bootMode:
         manageMode: True
@@ -15,26 +15,26 @@
       connections:
         - id: 1
           name: "{{ DMZ_VLAN }}"
-          functionType: "{{ NET_Eth }}"
+          functionType: "{{ NetworkTypeEthernet }}"
           portId: "Auto"
           requestedMbps: 2500 #2.5Gb
           networkName: "{{ DMZ_VLAN }}"
           boot:
             priority: "NotBootable"
         - id: 2
-          name: "{{ NET_SAN_A }}"
-          functionType: "{{ NET_FC }}"
+          name: "{{ NetworkSanA }}"
+          functionType: "{{ NetworkTypeFibreChannel }}"
           portId: "Auto"
           requestedMbps: 8000 #8Gb
-          networkName: "{{ NET_SAN_A }}"
+          networkName: "{{ NetworkSanA }}"
           boot:
             priority: "NotBootable"
         - id: 3
-          name: "{{ Deploy_NET }}"
-          functionType: "{{ NET_Eth }}"
+          name: "{{ DeploymentNetwork }}"
+          functionType: "{{ NetworkTypeEthernet }}"
           portId: "Auto"
           requestedMbps: 2500 #2.5Gb
-          networkName: "{{ Deploy_NET }}"
+          networkName: "{{ DeploymentNetwork }}"
           boot:
             priority: "Primary"
       sanStorage:
@@ -42,9 +42,9 @@
         manageSanStorage: true
         volumeAttachments:
           - id: 1
-            volumeName: '{{ Vol_Name_1 }}'
-            volumeStoragePoolName:  "{{ Vol_Stor_Pool1 }}"
-            volumeStorageSystemName: "{{ Vol_Stor_Sys }}"
+            volumeName: '{{ VolumeName }}'
+            volumeStoragePoolName:  "{{ VolumeStoragePoolName }}"
+            volumeStorageSystemName: "{{ VolumeStorageSystem }}"
             lunType: "Manual"
             lun: 0
             storagePaths:

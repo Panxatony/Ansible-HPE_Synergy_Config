@@ -1,27 +1,19 @@
 # Created by thopper91 (2017)
- 
-# Include all variable files in the vars folder
-#
-#- name: Include all variable files
-#  include_vars:
-#    dir: 'vars' #change directory if needed
-#    extensions:
-#        - yml
 
 - name: Creates a Device Manager for the Brocade SAN provider with the given hostname and credentials
   oneview_san_manager:
-#    config: '{{ config }}'
+    config: '{{ config }}'
     state: present
     data:
       providerDisplayName: 'Brocade Network Advisor'
       connectionInfo:
         - name: Host
-          value: "{{ SAN_Mgr_Host }}"
+          value: "{{ SanManagerHost }}"
         - name: Port
-          value: "{{ SAN_Mgr_Port }}"
+          value: "{{ SanManagerPort }}"
         - name: Username
-          value: "{{ SAN_Mgr_Username }}"
+          value: "{{ SanManagerUsername }}"
         - name: Password
-          value: "{{ SAN_Mgr_Password }}"
+          value: "{{ SanManagerPassword }}"
         - name: UseSsl
           value: true

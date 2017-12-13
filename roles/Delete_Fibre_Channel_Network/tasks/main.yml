@@ -1,8 +1,8 @@
 # Created by thopper91 (2017)
- 
+
 - name: Ensure that the Fibre Channel Network is absent
   oneview_fc_network:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: absent
     data:
       name: "{{ FC_Network }}"

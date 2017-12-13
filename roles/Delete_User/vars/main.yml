@@ -1,0 +1,3 @@
+---
+config: '{{ playbook_dir }}/config.json'
+User_Username: 'thopper91'

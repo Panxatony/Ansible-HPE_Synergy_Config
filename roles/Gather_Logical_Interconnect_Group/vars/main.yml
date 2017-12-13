@@ -1,0 +1,3 @@
+---
+config: '{{ playbook_dir }}/config.json'
+LIG_name: 'SYN-TEST-LE' #Synergy-Test-Logical Enclosure

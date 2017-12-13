@@ -1,0 +1,7 @@
+---
+config: '{{ playbook_dir }}/config.json'
+memory: '21474836480' # This is 20Gb
+Vol_Name: 'Name of Volume'
+Vol_Stor_Pool: 'FC-343434'
+Vol_Stor_Sys: 'Storage System name'
+Vol_Tem_Description: 'Insert a description here Sucka!'

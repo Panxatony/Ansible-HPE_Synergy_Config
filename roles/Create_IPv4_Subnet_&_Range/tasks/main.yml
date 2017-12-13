@@ -1,11 +1,11 @@
 # Created by thopper91 (2017)
- 
-- name: Add IPv4 '{{ Subnet_Name }}' Subnet
+
+- name: Add IPv4 '{{ SubnetName }}' Subnet
   oneview_id_pools_ipv4_subnet:
     config: "{{ config }}"
     state: present
     data:
-      name: "{{ Subnet_Name }}"
+      name: "{{ SubnetName }}"
       type: "Subnet"
       networkId: "{{ SubnetID }}" #Subnet ID in OneView
       subnetmask: "{{ SubnetMask }}"
@@ -13,35 +13,32 @@
       domain: "{{ IPv4_Domain }}"
       dnsServers: []
   delegate_to: localhost
-#
-#
-- name: Gather facts about '{{ Subnet_Name }}' IPV4 Subnets
+
+- name: Gather facts about '{{ SubnetName }}' IPV4 Subnets
   oneview_id_pools_ipv4_subnet_facts:
     config: "{{ config }}"
-    name: "{{ Subnet_Name }}"
+    name: "{{ SubnetName }}"
 - set_fact: subnet_uri="{{ id_pools_ipv4_subnets[0].uri }}"
-#
-#
-- name: Add IPv4 '{{ Range_Name }}' Range
+
+- name: Add IPv4 '{{ RangeName }}' Range
   oneview_id_pools_ipv4_range:
     config: "{{ config }}"
     state: present
     data:
-      name: "{{ Range_Name }}"
+      name: "{{ RangeName }}"
       subnetUri: "{{ subnet_uri }}"
       type: "Range"
       rangeCategory: "Custom"
-      startAddress: "{{ IPv4_Start_Address }}"
-      endAddress: "{{ IPv4_End_Address }}"
+      startAddress: "{{ IPv4StartAddress }}"
+      endAddress: "{{ IPv4EndAddress }}"
   delegate_to: localhost
-#
-#
-- name: Ensure the IPv4 '{{ Range_Name }}' Range is enabled
+
+- name: Ensure the IPv4 '{{ RangeName }}' Range is enabled
   oneview_id_pools_ipv4_range:
     config: "{{ config }}"
     state: present
     data:
-      name: "{{ Range_Name }}"
+      name: "{{ RangeName }}"
       subnetUri: "{{ subnet_uri }}"
       enabled: True
   delegate_to: localhost

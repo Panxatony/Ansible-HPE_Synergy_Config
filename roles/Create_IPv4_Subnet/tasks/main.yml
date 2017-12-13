@@ -1,15 +1,15 @@
 # Created by thopper91 (2017)
- 
-- name: Add '{{ Subnet_Name }}' IPv4 Subnet
+
+- name: Add '{{ SubnetName }}' IPv4 Subnet
   oneview_id_pools_ipv4_subnet:
     config: "{{ config }}"
     state: present
     data:
-      name: "{{ Subnet_Name }}"
+      name: "{{ SubnetName }}"
       type: "Subnet"
       networkId: "{{ SubnetID }}" #Subnet ID in OneView
-      subnetmask: "{{ IPv4_SubnetMask }}"
-      gateway: "{{ IPv4_Gateway }}"
-      domain: "{{ IPv4_Domain }}"
+      subnetmask: "{{ IPv4SubnetMask }}"
+      gateway: "{{ IPv4Gateway }}"
+      domain: "{{ IPv4Domain }}"
       dnsServers: []
   delegate_to: localhost

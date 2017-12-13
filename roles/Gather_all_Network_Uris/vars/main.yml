@@ -1,0 +1,8 @@
+---
+config: '{{ playbook_dir }}/config.json'
+Cust_VLAN: 'Customer VLAN'
+Deploy_NET: 'Deployment'
+DMZ_VLAN: 'DMZ VLAN'
+Man_VLAN: 'Management VLAN'
+NET_SAN_A: 'SAN-A'
+NET_SAN_B: 'SAN-B'

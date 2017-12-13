@@ -1,9 +1,9 @@
 # Created by thopper91 (2017)
- 
+
 - name: Gather facts about all Server Hardwares
   oneview_server_hardware_facts:
-#    config: "{{ config }}"
-    name :  "{{ Serv_b1 }}"
+    config: "{{ config }}"
+    name :  "{{ Serv_bay }}"
   delegate_to: localhost
 
 - debug: var=server_hardwares

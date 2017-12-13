@@ -1,11 +1,11 @@
 # Created by thopper91 (2017)
- 
+
 - name: Power Off the server hardware
   oneview_server_hardware:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: power_state_set
     data:
-        name : "{{ Serv_b1 }}" #Choose a bay and server to turn on
+        name : "{{ Serv_bay }}" #Choose a bay and server to turn on
         powerStateData:
             powerState: "Off"
             powerControl: "MomentaryPress"
@@ -14,7 +14,7 @@
 
 - name: Update Profile with Storage volume
   oneview_server_profile:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: present
     data:
       name: "{{ Prof_Name }}"
@@ -24,7 +24,7 @@
         volumeAttachments:
           - id: 1
             volumeName: "{{ Vol_Name_1 }}"
-            volumeStoragePoolName: "{{ Vol_Stor_Pool5 }}"
+            volumeStoragePoolName: "{{ Vol_Stor_Pool }}"
             volumeStorageSystemName: "{{ Vol_Stor_Sys }}"
             lunType: "Manual"
             lun: 0
@@ -37,7 +37,7 @@
                 storageTargetType: 'Auto'
           - id: 2
             volumeName:  "{{ Vol_Name_2 }}"
-            volumeStoragePoolName: "{{ Vol_Stor_Pool5 }}"
+            volumeStoragePoolName: "{{ Vol_Stor_Pool }}"
             volumeStorageSystemName: "{{ Vol_Stor_Sys }}"
             lunType: "Manual"
             lun: 1
@@ -50,7 +50,7 @@
                 storageTargetType: 'Auto'
           - id: 3
             volumeName: "{{ Vol_Name_3 }}"
-            volumeStoragePoolName: "{{ Vol_Stor_Pool5 }}"
+            volumeStoragePoolName: "{{ Vol_Stor_Pool }}"
             volumeStorageSystemName: "{{ Vol_Stor_Sys }}"
             lunType: "Manual"
             lun: 2
@@ -65,10 +65,10 @@
 
 - name: Power On the server hardware
   oneview_server_hardware:
-#    config: "{{ config }}"
+    config: "{{ config }}"
     state: power_state_set
     data:
-        name : "{{ Serv_b1 }}" #Choose a bay and server to turn on
+        name : "{{ Serv_bay }}" #Choose a bay and server to turn on
         powerStateData:
             powerState: "On"
             powerControl: "MomentaryPress"

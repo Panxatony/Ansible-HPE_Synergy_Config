@@ -1,21 +1,20 @@
 # Created by thopper91 (2017)
- 
+
 - name: Gather facts about '{{ Subnet_Name }}' IPV4 Subnet
   oneview_id_pools_ipv4_subnet_facts:
     config: "{{ config }}"
-    name: "{{ Subnet_Name }}"
-
+    name: "{{ SubnetName }}"
 - set_fact: subnet_uri="{{ id_pools_ipv4_subnets[0].uri }}"
 
-- name: Ensure the '{{ Range_Name }}' IPv4 Range exists
+- name: Ensure the '{{ RangeName }}' IPv4 Range exists
   oneview_id_pools_ipv4_range:
     config: "{{ config }}"
     state: present
     data:
-      name: "{{ Range_Name }}"
+      name: "{{ RangeName }}"
       subnetUri: "{{ subnet_uri }}"
       type: "Range"
       rangeCategory: "Custom"
-      startAddress: "{{ IPv4_Start_Address }}"
-      endAddress: "{{ IPv4_End_Address }}"
+      startAddress: "{{ IPv4StartAddress }}"
+      endAddress: "{{ IPv4EndAddress }}"
   delegate_to: localhost

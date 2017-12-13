@@ -1,0 +1,2 @@
+---
+config: '{{ playbook_dir }}/config.json'
