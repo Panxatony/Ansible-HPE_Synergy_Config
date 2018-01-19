@@ -1,0 +1,57 @@
+# This is installing all relevant tools for Synergy OneView
+# It works on the assumption in the playbook 'become: true' has been put in
+# otherwise each line requires 'sudo' at start
+---
+- name: Install pip
+  command: pip install
+
+- name: Get OneView SDK Module repositories
+  command: wget {{ item.name }}
+  with_items:
+    - { name: 'https://github.com/HewlettPackard/python-hpOneView/archive/master.zip' }
+    - { name: 'https://github.com/HewlettPackard/oneview-ansible/archive/master.zip' }
+
+- name: rename python zip file
+  command: mv master.zip python-master.zip
+
+- name: rename ansible zip file
+  command: mv master.zip.1 ansible-master.zip
+
+- name: Download relevant Github repositories
+  command: git clone {{ item.name }}
+  ignore_errors: true
+  with_items: 
+    - { name: 'https://github.com/HewlettPackard/python-hpICsp.git' }
+  tags: hpicsp
+
+- name: Install tools using 'pip'
+  command: pip install {{ item.name }}
+  with_items:
+    - { name: 'ansible' }
+
+- name: Install tools using 'apt-get'
+  command: apt-get install {{ item.name }}
+  with_items:
+    - { name: 'openssh-server' }
+    - { name: 'libssl-dev' }
+    - { name: 'python python-pip' }
+    - { name: 'unzip' }
+    - { name: 'python-hpilo' }
+
+- name: Unzip folders
+  command: unzip {{ item.name }}
+  ignore_errors: true
+  with_items:
+    - { name: 'python-master.zip' }
+    - { name: 'ansible-master.zip' }
+
+- name: Install Python OneView
+  command: pip install .
+  args:
+    chdir: /home/{{ location }}/python-hpOneView-master
+
+- name: Install Python HPiCSp
+  command: pip install .
+  args:
+    chdir: /home/{{ location }}/python-hpICsp
+  tags: hpicsp
